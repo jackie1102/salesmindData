@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="{% static 'images/salesmind.ico' %}">
+	<link rel="stylesheet" href="{% static 'js/layui/css/layui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/salesmind/common.css' %}">
+    <style>
+        .layui-form-checkbox i {
+            position: absolute;
+            right: 0;
+             width: 0px;
+            color: #fff;
+            font-size: 0px;
+            text-align: center;
+        }
+        .layui-form-checkbox {
+            position: relative;
+            height: 30px;
+            line-height: 28px;
+            margin-right: 0px;
+            padding-right: 0px;
+            border: 1px solid #d2d2d2;
+            cursor: pointer;
+            font-size: 0;
+            border-radius: 2px;
+            -webkit-transition: .1s linear;
+            transition: .1s linear;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<div style="padding: 20px;">
+    <form class="layui-form" action="">
+        <div class="layui-row">
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                    <input type="checkbox" name="city[0]" title="北京" value="北京">
+                    <input type="checkbox" name="city[1]" title="杭州" value="杭州">
+                </div>
+            </div>
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                    <input type="checkbox" name="city[2]" title="上海" value="上海">
+                    <input type="checkbox" name="city[3]" title="成都" value="成都">
+                </div>
+            </div>
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                    <input type="checkbox" name="city[4]" title="广州" value="广州">
+                    <input type="checkbox" name="city[5]" title="南京" value="南京">
+                </div>
+            </div>
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                    <input type="checkbox" name="city[6]" title="深圳" value="深圳">
+                    <input type="checkbox" name="city[7]" title="苏州" value="苏州">
+                </div>
+            </div>
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                    <input type="checkbox" name="city[8]" title="天津" value="天津">
+                    <input type="checkbox" name="city[9]" title="大连" value="大连">
+                </div>
+            </div>
+            <div class="layui-col-xs2 layui-col-sm2 layui-col-md2">
+                <div class="layui-form-item">
+                    <input type="checkbox" name="city[10]" title="重庆" value="重庆">
+                    <input type="checkbox" name="city[11]" title="武汉" value="武汉">
+                </div>
+            </div>
+        </div>
+        <div class="layui-row">
+            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">安徽</h5>
+                        <div class="layui-colla-content" style="min-height: 175px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[12]" title="全部" value="安徽/全部">
+                                    <input type="checkbox" name="city[13]" title="合肥" value="安徽/合肥">
+                                    <input type="checkbox" name="city[14]" title="芜湖" value="安徽/芜湖">
+                                    <input type="checkbox" name="city[15]" title="淮南" value="安徽/淮南">
+                                    <input type="checkbox" name="city[16]" title="安庆" value="安徽/安庆">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[17]" title="宿州" value="安徽/宿州">
+                                    <input type="checkbox" name="city[18]" title="阜阳" value="安徽/阜阳">
+                                    <input type="checkbox" name="city[19]" title="亳州" value="安徽/亳州">
+                                    <input type="checkbox" name="city[20]" title="黄山" value="安徽/黄山">
+                                    <input type="checkbox" name="city[29]" title="马鞍山" value="安徽/马鞍山">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[21]" title="滁州" value="安徽/滁州">
+                                    <input type="checkbox" name="city[22]" title="淮北" value="安徽/淮北">
+                                    <input type="checkbox" name="city[23]" title="铜陵" value="安徽/铜陵">
+                                    <input type="checkbox" name="city[24]" title="宣城" value="安徽/宣城">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[25]" title="六安" value="安徽/六安">
+                                    <input type="checkbox" name="city[26]" title="巢湖" value="安徽/巢湖">
+                                    <input type="checkbox" name="city[27]" title="池州" value="安徽/池州">
+                                    <input type="checkbox" name="city[28]" title="蚌埠" value="安徽/蚌埠">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">甘肃</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[77]" title="全部" value="甘肃/全部">
+                                    <input type="checkbox" name="city[78]" title="兰州" value="甘肃/兰州">
+                                    <input type="checkbox" name="city[79]" title="平凉" value="甘肃/平凉">
+                                    <input type="checkbox" name="city[80]" title="庆阳" value="甘肃/庆阳">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[81]" title="武威" value="甘肃/武威">
+                                    <input type="checkbox" name="city[82]" title="金昌" value="甘肃/金昌">
+                                    <input type="checkbox" name="city[83]" title="酒泉" value="甘肃/酒泉">
+                                    <input type="checkbox" name="city[84]" title="天水" value="甘肃/天水">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[85]" title="陇南" value="甘肃/陇南">
+                                    <input type="checkbox" name="city[86]" title="临夏" value="甘肃/临夏">
+                                    <input type="checkbox" name="city[87]" title="合作" value="甘肃/合作">
+                                    <input type="checkbox" name="city[88]" title="嘉峪关" value="甘肃/嘉峪关">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[89]" title="白银" value="甘肃/白银">
+                                    <input type="checkbox" name="city[90]" title="定西" value="甘肃/定西">
+                                    <input type="checkbox" name="city[91]" title="张掖" value="甘肃/张掖">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">湖北</h5>
+                        <div class="layui-colla-content" style="min-height: 205px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[134]" title="全部" value="湖北/全部">
+                                    <input type="checkbox" name="city[135]" title="武汉" value="湖北/武汉">
+                                    <input type="checkbox" name="city[136]" title="荆州" value="湖北/荆州">
+                                    <input type="checkbox" name="city[137]" title="黄冈" value="湖北/黄冈">
+                                    <input type="checkbox" name="city[138]" title="宜昌" value="湖北/宜昌">
+                                    <input type="checkbox" name="city[139]" title="恩施" value="湖北/恩施">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[140]" title="十堰" value="湖北/十堰">
+                                    <input type="checkbox" name="city[141]" title="随州" value="湖北/随州">
+                                    <input type="checkbox" name="city[142]" title="荆门" value="湖北/荆门">
+                                    <input type="checkbox" name="city[143]" title="天门" value="湖北/天门">
+                                    <input type="checkbox" name="city[144]" title="仙桃" value="湖北/仙桃">
+                                    <input type="checkbox" name="city[145]" title="潜江" value="湖北/潜江">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[146]" title="襄阳" value="湖北/襄阳">
+                                    <input type="checkbox" name="city[147]" title="鄂州" value="湖北/鄂州">
+                                    <input type="checkbox" name="city[148]" title="孝感" value="湖北/孝感">
+                                    <input type="checkbox" name="city[149]" title="黄石" value="湖北/黄石">
+                                    <input type="checkbox" name="city[150]" title="咸宁" value="湖北/咸宁">
+                                    <input type="checkbox" name="city[151]" title="神农架" value="湖北/神农架">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="layui-colla-item">
+
+                        <h5 class="layui-colla-title">江苏</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[200]" title="全部" value="江苏/全部">
+                                    <input type="checkbox" name="city[201]" title="苏州" value="江苏/苏州">
+                                    <input type="checkbox" name="city[202]" title="无锡" value="江苏/无锡">
+                                    <input type="checkbox" name="city[203]" title="南京" value="江苏/南京">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[204]" title="镇江" value="江苏/镇江">
+                                    <input type="checkbox" name="city[205]" title="南通" value="江苏/南通">
+                                    <input type="checkbox" name="city[206]" title="扬州" value="江苏/扬州">
+                                    <input type="checkbox" name="city[207]" title="宿迁" value="江苏/宿迁">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[208]" title="徐州" value="江苏/徐州">
+                                    <input type="checkbox" name="city[209]" title="昆山" value="江苏/昆山">
+                                    <input type="checkbox" name="city[210]" title="常熟" value="江苏/常熟">
+                                    <input type="checkbox" name="city[211]" title="淮安" value="江苏/淮安">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[212]" title="常州" value="江苏/常州">
+                                    <input type="checkbox" name="city[213]" title="泰州" value="江苏/泰州">
+                                    <input type="checkbox" name="city[214]" title="盐城" value="江苏/盐城">
+                                    <input type="checkbox" name="city[215]" title="连云港" value="江苏/连云港">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">内蒙古</h5>
+                        <div class="layui-colla-content" style="min-height: 240px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[253]" title="全部" value="内蒙古/全部">
+                                    <input type="checkbox" name="city[254]" title="乌海" value="内蒙古/乌海">
+                                    <input type="checkbox" name="city[255]" title="集宁" value="内蒙古/集宁">
+                                    <input type="checkbox" name="city[256]" title="通辽" value="内蒙古/通辽">
+                                    <input type="checkbox" name="city[257]" title="包头" value="内蒙古/包头">
+                                    <input type="checkbox" name="city[258]" title="临河" value="内蒙古/临河">
+                                    <input type="checkbox" name="city[259]" title="赤峰" value="内蒙古/赤峰">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs8 layui-col-sm8 layui-col-md8">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[260]" title="阿拉善左旗" value="内蒙古/阿拉善盟">
+                                    <input type="checkbox" name="city[261]" title="鄂尔多斯" value="内蒙古/鄂尔多斯">
+                                    <input type="checkbox" name="city[262]" title="呼和浩特" value="内蒙古/呼和浩特">
+                                    <input type="checkbox" name="city[263]" title="锡林浩特" value="内蒙古/锡林浩特">
+                                    <input type="checkbox" name="city[264]" title="呼伦贝尔" value="内蒙古/呼伦贝尔">
+                                    <input type="checkbox" name="city[265]" title="乌兰浩特" value="内蒙古/乌兰浩特">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">山西</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[299]" title="全部" value="山西/全部">
+                                    <input type="checkbox" name="city[300]" title="太原" value="山西/太原">
+                                    <input type="checkbox" name="city[301]" title="临汾" value="山西/临汾">
+                                    <input type="checkbox" name="city[302]" title="运城" value="山西/运城">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[303]" title="朔州" value="山西/朔州">
+                                    <input type="checkbox" name="city[304]" title="忻州" value="山西/忻州">
+                                    <input type="checkbox" name="city[305]" title="长治" value="山西/长治">
+                                    <input type="checkbox" name="city[306]" title="大同" value="山西/大同">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[307]" title="阳泉" value="山西/阳泉">
+                                    <input type="checkbox" name="city[308]" title="晋中" value="山西/晋中">
+                                    <input type="checkbox" name="city[309]" title="晋城" value="山西/晋城">
+                                    <input type="checkbox" name="city[310]" title="吕梁" value="山西/吕梁">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">西藏</h5>
+                        <div class="layui-colla-content" style="min-height: 105px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[363]" title="全部" value="西藏/全部">
+                                    <input type="checkbox" name="city[364]" title="拉萨" value="西藏/拉萨">
+                                    <input type="checkbox" name="city[365]" title="山南" value="西藏/山南">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[366]" title="阿里" value="西藏/阿里">
+                                    <input type="checkbox" name="city[367]" title="昌都" value="西藏/昌都">
+                                    <input type="checkbox" name="city[368]" title="那曲" value="西藏/那曲">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[369]" title="林芝" value="西藏/林芝">
+                                    <input type="checkbox" name="city[370]" title="日喀则" value="西藏/日喀则">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">福建</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[30]" title="全部" value="福建/全部">
+                                    <input type="checkbox" name="city[31]" title="福州" value="福建/福州">
+                                    <input type="checkbox" name="city[32]" title="泉州" value="福建/泉州">
+                                    <input type="checkbox" name="city[33]" title="漳州" value="福建/漳州">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[34]" title="龙岩" value="福建/龙岩">
+                                    <input type="checkbox" name="city[35]" title="南平" value="福建/南平">
+                                    <input type="checkbox" name="city[36]" title="厦门" value="福建/厦门">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[37]" title="宁德" value="福建/宁德">
+                                    <input type="checkbox" name="city[38]" title="莆田" value="福建/莆田">
+                                    <input type="checkbox" name="city[39]" title="三明" value="福建/三明">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">贵州</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[92]" title="全部" value="贵州/全部">
+                                    <input type="checkbox" name="city[93]" title="贵阳" value="贵州/贵阳">
+                                    <input type="checkbox" name="city[94]" title="安顺" value="贵州/安顺">
+                                    <input type="checkbox" name="city[95]" title="六盘水" value="贵州/六盘水">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[96]" title="都匀" value="贵州/都匀">
+                                    <input type="checkbox" name="city[97]" title="兴义" value="贵州/兴义">
+                                    <input type="checkbox" name="city[98]" title="铜仁" value="贵州/铜仁">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[99]" title="毕节" value="贵州/毕节">
+                                    <input type="checkbox" name="city[100]" title="遵义" value="贵州/遵义">
+                                    <input type="checkbox" name="city[101]" title="凯里" value="贵州/凯里">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">湖南</h5>
+                        <div class="layui-colla-content" style="min-height: 175px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[152]" title="全部" value="湖南/全部">
+                                    <input type="checkbox" name="city[153]" title="长沙" value="湖南/长沙">
+                                    <input type="checkbox" name="city[154]" title="株洲" value="湖南/株洲">
+                                    <input type="checkbox" name="city[155]" title="衡阳" value="湖南/衡阳">
+                                    <input type="checkbox" name="city[156]" title="郴州" value="湖南/郴州">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[157]" title="常德" value="湖南/常德">
+                                    <input type="checkbox" name="city[158]" title="益阳" value="湖南/益阳">
+                                    <input type="checkbox" name="city[159]" title="娄底" value="湖南/娄底">
+                                    <input type="checkbox" name="city[160]" title="邵阳" value="湖南/邵阳">
+                                    <input type="checkbox" name="city[161]" title="岳阳" value="湖南/岳阳">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[162]" title="怀化" value="湖南/怀化">
+                                    <input type="checkbox" name="city[163]" title="永州" value="湖南/永州">
+                                    <input type="checkbox" name="city[164]" title="吉首" value="湖南/吉首">
+                                    <input type="checkbox" name="city[165]" title="湘潭" value="湖南/湘潭">
+                                    <input type="checkbox" name="city[166]" title="张家界" value="湖南/张家界">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">江西</h5>
+                        <div class="layui-colla-content" style="min-height: 105px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[216]" title="全部" value="江西/全部">
+                                    <input type="checkbox" name="city[217]" title="南昌" value="江西/南昌">
+                                    <input type="checkbox" name="city[218]" title="上饶" value="江西/上饶">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[219]" title="抚州" value="江西/抚州">
+                                    <input type="checkbox" name="city[220]" title="宜春" value="江西/宜春">
+                                    <input type="checkbox" name="city[221]" title="鹰潭" value="江西/鹰潭">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[222]" title="赣州" value="江西/赣州">
+                                    <input type="checkbox" name="city[223]" title="萍乡" value="江西/萍乡">
+                                    <input type="checkbox" name="city[224]" title="新余" value="江西/新余">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[225]" title="九江" value="江西/九江">
+                                    <input type="checkbox" name="city[226]" title="吉安" value="江西/吉安">
+                                    <input type="checkbox" name="city[227]" title="景德镇" value="江西/景德镇">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">宁夏</h5>
+                        <div class="layui-colla-content" style="min-height: 105px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[266]" title="全部" value="宁夏/全部">
+                                    <input type="checkbox" name="city[267]" title="银川" value="宁夏/银川">
+                                    <input type="checkbox" name="city[268]" title="中卫" value="宁夏/中卫">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[269]" title="固原" value="宁夏/固原">
+                                    <input type="checkbox" name="city[270]" title="吴忠" value="宁夏/吴忠">
+                                    <input type="checkbox" name="city[271]" title="石嘴山" value="宁夏/石嘴山">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">陕西</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[311]" title="全部" value="陕西/全部">
+                                    <input type="checkbox" name="city[312]" title="西安" value="陕西/西安">
+                                    <input type="checkbox" name="city[313]" title="延安" value="陕西/延安">
+                                    <input type="checkbox" name="city[314]" title="榆林" value="陕西/榆林">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[315]" title="铜川" value="陕西/铜川">
+                                    <input type="checkbox" name="city[316]" title="商洛" value="陕西/商洛">
+                                    <input type="checkbox" name="city[317]" title="安康" value="陕西/安康">
+                                    <input type="checkbox" name="city[318]" title="汉中" value="陕西/汉中">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[319]" title="宝鸡" value="陕西/宝鸡">
+                                    <input type="checkbox" name="city[320]" title="咸阳" value="陕西/咸阳">
+                                    <input type="checkbox" name="city[321]" title="渭南" value="陕西/渭南">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">云南</h5>
+                        <div class="layui-colla-content" style="min-height: 175px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[371]" title="全部" value="云南/全部">
+                                    <input type="checkbox" name="city[372]" title="昆明" value="云南/昆明">
+                                    <input type="checkbox" name="city[373]" title="红河" value="云南/红河">
+                                    <input type="checkbox" name="city[374]" title="文山" value="云南/文山">
+                                    <input type="checkbox" name="city[375]" title="香格里拉" value="云南/香格里拉">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[376]" title="玉溪" value="云南/玉溪">
+                                    <input type="checkbox" name="city[377]" title="楚雄" value="云南/楚雄">
+                                    <input type="checkbox" name="city[378]" title="普洱" value="云南/普洱">
+                                    <input type="checkbox" name="city[379]" title="昭通" value="云南/昭通">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[380]" title="临沧" value="云南/临沧">
+                                    <input type="checkbox" name="city[381]" title="怒江" value="云南/怒江">
+                                    <input type="checkbox" name="city[382]" title="丽江" value="云南/丽江">
+                                    <input type="checkbox" name="city[383]" title="德宏" value="云南/德宏">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[384]" title="景洪" value="云南/景洪">
+                                    <input type="checkbox" name="city[385]" title="大理" value="云南/大理">
+                                    <input type="checkbox" name="city[386]" title="曲靖" value="云南/曲靖">
+                                    <input type="checkbox" name="city[387]" title="保山" value="云南/保山">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">广东</h5>
+                        <div class="layui-colla-content" style="min-height: 205px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[40]" title="全部" value="广东/全部">
+                                    <input type="checkbox" name="city[41]" title="深圳" value="广东/深圳">
+                                    <input type="checkbox" name="city[42]" title="广州" value="广东/广州">
+                                    <input type="checkbox" name="city[43]" title="惠州" value="广东/惠州">
+                                    <input type="checkbox" name="city[44]" title="梅州" value="广东/梅州">
+                                    <input type="checkbox" name="city[45]" title="汕头" value="广东/汕头">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[46]" title="珠海" value="广东/珠海">
+                                    <input type="checkbox" name="city[57]" title="佛山" value="广东/佛山">
+                                    <input type="checkbox" name="city[48]" title="肇庆" value="广东/肇庆">
+                                    <input type="checkbox" name="city[49]" title="湛江" value="广东/湛江">
+                                    <input type="checkbox" name="city[50]" title="江门" value="广东/江门">
+                                    <input type="checkbox" name="city[51]" title="河源" value="广东/河源">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[52]" title="清远" value="广东/清远">
+                                    <input type="checkbox" name="city[53]" title="云浮" value="广东/云浮">
+                                    <input type="checkbox" name="city[54]" title="东莞" value="广东/东莞">
+                                    <input type="checkbox" name="city[55]" title="中山" value="广东/中山">
+                                    <input type="checkbox" name="city[56]" title="阳江" value="广东/阳江">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[57]" title="揭阳" value="广东/揭阳">
+                                    <input type="checkbox" name="city[58]" title="茂名" value="广东/茂名">
+                                    <input type="checkbox" name="city[59]" title="汕尾" value="广东/汕尾">
+                                    <input type="checkbox" name="city[60]" title="韶关" value="广东/韶关">
+                                    <input type="checkbox" name="city[61]" title="潮州" value="广东/潮州">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">河北</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[102]" title="全&nbsp;&nbsp;&nbsp;部" value="河北/全部">
+                                    <input type="checkbox" name="city[103]" title="石家庄" value="河北/石家庄">
+                                    <input type="checkbox" name="city[104]" title="张家口" value="河北/张家口">
+                                    <input type="checkbox" name="city[105]" title="秦皇岛" value="河北/秦皇岛">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[106]" title="承德" value="河北/承德">
+                                    <input type="checkbox" name="city[107]" title="唐山" value="河北/唐山">
+                                    <input type="checkbox" name="city[108]" title="沧州" value="河北/沧州">
+                                    <input type="checkbox" name="city[109]" title="衡水" value="河北/衡水">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[110]" title="邢台" value="河北/邢台">
+                                    <input type="checkbox" name="city[111]" title="邯郸" value="河北/邯郸">
+                                    <input type="checkbox" name="city[112]" title="保定" value="河北/保定">
+                                    <input type="checkbox" name="city[113]" title="廊坊" value="河北/廊坊">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">黑龙江</h5>
+                        <div class="layui-colla-content" style="min-height: 175px;">
+                             <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[167]" title="全部" value="黑龙江/全部">
+                                    <input type="checkbox" name="city[168]" title="绥化" value="黑龙江/绥化">
+                                    <input type="checkbox" name="city[169]" title="黑河" value="黑龙江/黑河">
+                                    <input type="checkbox" name="city[170]" title="伊春" value="黑龙江/伊春">
+                                    <input type="checkbox" name="city[171]" title="大庆" value="黑龙江/大庆">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[172]" title="哈尔滨" value="黑龙江/哈尔滨">
+                                    <input type="checkbox" name="city[173]" title="牡丹江" value="黑龙江/牡丹江">
+                                    <input type="checkbox" name="city[174]" title="佳木斯" value="黑龙江/佳木斯">
+                                    <input type="checkbox" name="city[175]" title="双鸭山" value="黑龙江/双鸭山">
+                                    <input type="checkbox" name="city[176]" title="七台河" value="黑龙江/七台河">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[177]" title="鸡西" value="黑龙江/鸡西">
+                                    <input type="checkbox" name="city[178]" title="鹤岗" value="黑龙江/鹤岗">
+                                    <input type="checkbox" name="city[179]" title="齐齐哈尔" value="黑龙江/齐齐哈尔">
+                                    <input type="checkbox" name="city[180]" title="大兴安岭" value="黑龙江/大兴安岭">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">吉林</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[228]" title="全部" value="吉林/全部">
+                                    <input type="checkbox" name="city[229]" title="长春" value="吉林/长春">
+                                    <input type="checkbox" name="city[230]" title="延吉" value="吉林/延吉">
+                                    <input type="checkbox" name="city[231]" title="四平" value="吉林/四平">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[232]" title="白山" value="吉林/白山">
+                                    <input type="checkbox" name="city[233]" title="白城" value="吉林/白城">
+                                    <input type="checkbox" name="city[234]" title="辽源" value="吉林/辽源">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[235]" title="松原" value="吉林/松原">
+                                    <input type="checkbox" name="city[236]" title="吉林" value="吉林/吉林">
+                                    <input type="checkbox" name="city[237]" title="通化" value="吉林/通化">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">青海</h5>
+                        <div class="layui-colla-content" style="min-height: 105px;">
+                            <div class="layui-col-xs4 layui-col-sm4 ayui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[272]" title="全部" value="青海/全部">
+                                    <input type="checkbox" name="city[273]" title="西宁" value="青海/西宁">
+                                    <input type="checkbox" name="city[274]" title="黄南" value="青海/黄南">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[275]" title="海北" value="青海/海北">
+                                    <input type="checkbox" name="city[276]" title="果洛" value="青海/果洛">
+                                    <input type="checkbox" name="city[277]" title="玉树" value="青海/玉树">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[278]" title="海西" value="青海/海西">
+                                    <input type="checkbox" name="city[279]" title="海东" value="青海/海东">
+                                    <input type="checkbox" name="city[280]" title="海南" value="青海/海南">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">四川</h5>
+                        <div class="layui-colla-content" style="min-height: 205px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[322]" title="全部" value="四川/全部">
+                                    <input type="checkbox" name="city[323]" title="成都" value="四川/成都">
+                                    <input type="checkbox" name="city[324]" title="自贡" value="四川/自贡">
+                                    <input type="checkbox" name="city[325]" title="绵阳" value="四川/绵阳">
+                                    <input type="checkbox" name="city[326]" title="南充" value="四川/南充">
+                                    <input type="checkbox" name="city[327]" title="达州" value="四川/达州">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[328]" title="遂宁" value="四川/遂宁">
+                                    <input type="checkbox" name="city[329]" title="广安" value="四川/广安">
+                                    <input type="checkbox" name="city[330]" title="巴中" value="四川/巴中">
+                                    <input type="checkbox" name="city[331]" title="泸州" value="四川/泸州">
+                                    <input type="checkbox" name="city[332]" title="宜宾" value="四川/宜宾">
+                                    <input type="checkbox" name="city[333]" title="内江" value="四川/内江">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[334]" title="资阳" value="四川/资阳">
+                                    <input type="checkbox" name="city[335]" title="乐山" value="四川/乐山">
+                                    <input type="checkbox" name="city[336]" title="眉山" value="四川/眉山">
+                                    <input type="checkbox" name="city[337]" title="凉山" value="四川/凉山">
+                                    <input type="checkbox" name="city[338]" title="雅安" value="四川/雅安">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[339]" title="甘孜" value="四川/甘孜">
+                                    <input type="checkbox" name="city[340]" title="阿坝" value="四川/阿坝">
+                                    <input type="checkbox" name="city[341]" title="德阳" value="四川/德阳">
+                                    <input type="checkbox" name="city[342]" title="广元" value="四川/广元">
+                                    <input type="checkbox" name="city[343]" title="攀枝花" value="四川/攀枝花">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+
+                        <h5 class="layui-colla-title">浙江</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[388]" title="全部" value="浙江/全部">
+                                    <input type="checkbox" name="city[389]" title="杭州" value="浙江/杭州">
+                                    <input type="checkbox" name="city[390]" title="舟山" value="浙江/舟山">
+                                    <input type="checkbox" name="city[391]" title="湖州" value="浙江/湖州">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[392]" title="嘉兴" value="浙江/嘉兴">
+                                    <input type="checkbox" name="city[393]" title="金华" value="浙江/金华">
+                                    <input type="checkbox" name="city[394]" title="绍兴" value="浙江/绍兴">
+                                    <input type="checkbox" name="city[395]" title="台州" value="浙江/台州">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[396]" title="温州" value="浙江/温州">
+                                    <input type="checkbox" name="city[397]" title="丽水" value="浙江/丽水">
+                                    <input type="checkbox" name="city[398]" title="衢州" value="浙江/衢州">
+                                    <input type="checkbox" name="city[399]" title="宁波" value="浙江/宁波">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">广西</h5>
+                        <div class="layui-colla-content" style="min-height: 140px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[62]" title="全部" value="广西/全部">
+                                    <input type="checkbox" name="city[63]" title="南宁" value="广西/南宁">
+                                    <input type="checkbox" name="city[64]" title="柳州" value="广西/柳州">
+                                    <input type="checkbox" name="city[65]" title="来宾" value="广西/来宾">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[66]" title="桂林" value="广西/桂林">
+                                    <input type="checkbox" name="city[67]" title="梧州" value="广西/梧州">
+                                    <input type="checkbox" name="city[68]" title="贵港" value="广西/贵港">
+                                    <input type="checkbox" name="city[69]" title="玉林" value="广西/玉林">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[70]" title="百色" value="广西/百色">
+                                    <input type="checkbox" name="city[71]" title="钦州" value="广西/钦州">
+                                    <input type="checkbox" name="city[72]" title="河池" value="广西/河池">
+                                    <input type="checkbox" name="city[73]" title="防城港" value="广西/防城港">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[74]" title="北海" value="广西/北海">
+                                    <input type="checkbox" name="city[75]" title="崇左" value="广西/崇左">
+                                    <input type="checkbox" name="city[76]" title="贺州" value="广西/贺州">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">河南</h5>
+                        <div class="layui-colla-content" style="min-height: 240px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[114]" title="全部" value="河南/全部">
+                                    <input type="checkbox" name="city[115]" title="郑州" value="河南/郑州">
+                                    <input type="checkbox" name="city[116]" title="新乡" value="河南/新乡">
+                                    <input type="checkbox" name="city[117]" title="许昌" value="河南/许昌">
+                                    <input type="checkbox" name="city[118]" title="信阳" value="河南/信阳">
+                                    <input type="checkbox" name="city[119]" title="南阳" value="河南/南阳">
+                                    <input type="checkbox" name="city[120]" title="开封" value="河南/开封">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[121]" title="洛阳" value="河南/洛阳">
+                                    <input type="checkbox" name="city[122]" title="商丘" value="河南/商丘">
+                                    <input type="checkbox" name="city[123]" title="焦作" value="河南/焦作">
+                                    <input type="checkbox" name="city[124]" title="鹤壁" value="河南/鹤壁">
+                                    <input type="checkbox" name="city[125]" title="濮阳" value="河南/濮阳">
+                                    <input type="checkbox" name="city[126]" title="周口" value="河南/周口">
+                                    <input type="checkbox" name="city[127]" title="漯河" value="河南/漯河">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[128]" title="西平" value="河南/西平">
+                                    <input type="checkbox" name="city[129]" title="济源" value="河南/济源">
+                                    <input type="checkbox" name="city[130]" title="安阳" value="河南/安阳">
+                                    <input type="checkbox" name="city[131]" title="平顶山" value="河南/平顶山">
+                                    <input type="checkbox" name="city[132]" title="驻马店" value="河南/驻马店">
+                                    <input type="checkbox" name="city[133]" title="三门峡" value="河南/三门峡">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">海南</h5>
+                        <div class="layui-colla-content" style="min-height: 175px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[181]" title="全部" value="海南/全部">
+                                    <input type="checkbox" name="city[182]" title="海口" value="海南/海口">
+                                    <input type="checkbox" name="city[183]" title="三亚" value="海南/三亚">
+                                    <input type="checkbox" name="city[184]" title="东方" value="海南/东方">
+                                    <input type="checkbox" name="city[185]" title="临高" value="海南/临高">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[186]" title="澄迈" value="海南/澄迈">
+                                    <input type="checkbox" name="city[187]" title="儋州" value="海南/儋州">
+                                    <input type="checkbox" name="city[188]" title="昌江" value="海南/昌江">
+                                    <input type="checkbox" name="city[189]" title="白沙" value="海南/白沙">
+                                    <input type="checkbox" name="city[190]" title="琼中" value="海南/琼中">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[191]" title="定安" value="海南/定安">
+                                    <input type="checkbox" name="city[192]" title="屯昌" value="海南/屯昌">
+                                    <input type="checkbox" name="city[193]" title="琼海" value="海南/琼海">
+                                    <input type="checkbox" name="city[194]" title="文昌" value="海南/文昌">
+                                    <input type="checkbox" name="city[195]" title="保亭" value="海南/保亭">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[196]" title="万宁" value="海南/万宁">
+                                    <input type="checkbox" name="city[197]" title="陵水" value="海南/陵水">
+                                    <input type="checkbox" name="city[198]" title="乐东" value="海南/乐东">
+                                    <input type="checkbox" name="city[199]" title="五指山" value="海南/五指山">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">辽宁</h5>
+                        <div class="layui-colla-content" style="min-height: 175px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[238]" title="全部" value="辽宁/全部">
+                                    <input type="checkbox" name="city[239]" title="沈阳" value="辽宁/沈阳">
+                                    <input type="checkbox" name="city[240]" title="鞍山" value="辽宁/鞍山">
+                                    <input type="checkbox" name="city[241]" title="抚顺" value="辽宁/抚顺">
+                                    <input type="checkbox" name="city[242]" title="本溪" value="辽宁/本溪">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[243]" title="丹东" value="辽宁/丹东">
+                                    <input type="checkbox" name="city[244]" title="营口" value="辽宁/营口">
+                                    <input type="checkbox" name="city[245]" title="阜新" value="辽宁/阜新">
+                                    <input type="checkbox" name="city[246]" title="辽阳" value="辽宁/辽阳">
+                                    <input type="checkbox" name="city[247]" title="铁岭" value="辽宁/铁岭">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[248]" title="朝阳" value="辽宁/朝阳">
+                                    <input type="checkbox" name="city[249]" title="盘锦" value="辽宁/盘锦">
+                                    <input type="checkbox" name="city[250]" title="大连" value="辽宁/大连">
+                                    <input type="checkbox" name="city[251]" title="锦州" value="辽宁/锦州">
+                                    <input type="checkbox" name="city[252]" title="葫芦岛" value="辽宁/葫芦岛">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">山东</h5>
+                        <div class="layui-colla-content" style="min-height: 205px;">
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[281]" title="全部" value="山东/全部">
+                                    <input type="checkbox" name="city[282]" title="济南" value="山东/济南">
+                                    <input type="checkbox" name="city[283]" title="潍坊" value="山东/潍坊">
+                                    <input type="checkbox" name="city[284]" title="临沂" value="山东/临沂">
+                                    <input type="checkbox" name="city[285]" title="菏泽" value="山东/菏泽">
+                                    <input type="checkbox" name="city[286]" title="滨州" value="山东/滨州">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[287]" title="东营" value="山东/东营">
+                                    <input type="checkbox" name="city[288]" title="威海" value="山东/威海">
+                                    <input type="checkbox" name="city[289]" title="枣庄" value="山东/枣庄">
+                                    <input type="checkbox" name="city[290]" title="日照" value="山东/日照">
+                                    <input type="checkbox" name="city[291]" title="莱芜" value="山东/莱芜">
+                                    <input type="checkbox" name="city[292]" title="聊城" value="山东/聊城">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[293]" title="青岛" value="山东/青岛">
+                                    <input type="checkbox" name="city[294]" title="淄博" value="山东/淄博">
+                                    <input type="checkbox" name="city[295]" title="德州" value="山东/德州">
+                                    <input type="checkbox" name="city[296]" title="烟台" value="山东/烟台">
+                                    <input type="checkbox" name="city[297]" title="济宁" value="山东/济宁">
+                                    <input type="checkbox" name="city[298]" title="泰安" value="山东/泰安">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">新疆</h5>
+                        <div class="layui-colla-content" style="min-height: 240px;">
+                            <div class="layui-col-xs3 layui-col-sm3 layui-col-md3">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[344]" title="全部" value="新疆/全部">
+                                    <input type="checkbox" name="city[345]" title="昌吉" value="新疆/昌吉">
+                                    <input type="checkbox" name="city[346]" title="喀什" value="新疆/喀什">
+                                    <input type="checkbox" name="city[347]" title="伊宁" value="新疆/伊宁">
+                                    <input type="checkbox" name="city[348]" title="塔城" value="新疆/塔城">
+                                    <input type="checkbox" name="city[349]" title="哈密" value="新疆/哈密">
+                                    <input type="checkbox" name="city[350]" title="和田" value="新疆/和田">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs4 layui-col-sm4 layui-col-md4">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[351]" title="博&nbsp;&nbsp;&nbsp;&nbsp;乐" value="新疆/博乐">
+                                    <input type="checkbox" name="city[352]" title="石河子" value="新疆/石河子">
+                                    <input type="checkbox" name="city[353]" title="五家渠" value="新疆/五家渠">
+                                    <input type="checkbox" name="city[354]" title="吐鲁番" value="新疆/吐鲁番">
+                                    <input type="checkbox" name="city[355]" title="库尔勒" value="新疆/库尔勒">
+                                    <input type="checkbox" name="city[356]" title="阿拉尔" value="新疆/阿拉尔">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs5 layui-col-sm5 layui-col-md5">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="city[357]" title="阿克苏" value="新疆/阿克苏">
+                                    <input type="checkbox" name="city[358]" title="阿勒泰" value="新疆/阿勒泰">
+                                    <input type="checkbox" name="city[359]" title="阿图什" value="新疆/阿图什">
+                                    <input type="checkbox" name="city[360]" title="乌鲁木齐" value="新疆/乌鲁木齐">
+                                    <input type="checkbox" name="city[361]" title="图木舒克" value="新疆/图木舒克">
+                                    <input type="checkbox" name="city[362]" title="克拉玛依" value="新疆/克拉玛依">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: right;padding-top: 20px;margin-bottom: 0px;">
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit="" lay-filter="btn">确定</button>
+                    <button  class="layui-btn layui-btn-normal layui-btn-sm" type="button" onclick="_close()">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layui/layui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/salesmind/common.js' %}"></script>
+<script type="text/javascript">
+    layui.use(['element','form'], function() {
+        var element = layui.element,form=layui.form;
+        form.on('submit(btn)', function(data){
+            var params = data.field;
+            var value="";
+            for(var k in params){
+                value += params[k] +",";
+            }
+            parent.$("#area").val(value);
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            return false;
+        });
+        });
+    function _close() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+    </script>
+</body>
+</html>

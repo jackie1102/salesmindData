@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">锦程物流网</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <form class="layui-form" action="">
+                <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                <input type="hidden" name="spider_id" value="14">
+                <div id="formm" class="layui-col-md8">
+                    <div class="layui-col-md8">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">url</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="start_url" autocomplete="off" class="layui-input" placeholder="请输入爬取url">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载文件名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                    </div>
+                </div>
+            </form>
+            <h2 class="site-h1">操作说明</h2>
+            <ul class="layui-timeline">
+                <li>
+                    <div style="margin-left: 20px">
+                        <h5>1.输入url（不能为空）</h5>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp;url提取方法：打开链接 http://company.jctrans.com/ 在输入框输入任意词汇或选择条件点击搜索，复制浏览器中的url，
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;例如：http://company.jctrans.com/Company/List/2050-0----0/1.html </p>
+                    </div>
+                </li>
+                <li>
+                    <div style="margin-left: 20px">
+                        <h5>2.输入文件名（不能为空）</h5>
+                    </div>
+                </li>
+                <li>
+                    <div style="margin-left: 20px">
+                        <h5>3.点击生成任务</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        layui.use(['element','form'], function() {
+            var form=layui.form;
+            form.on('submit(btn)', function(data){
+                var param=data.field;
+                var res = post('/spider/create_task/',param);
+                if(res.errId =="0"){
+                    layer.msg("创建成功",{icon: 1,offset: '100px'});
+                }else{
+                    layer.msg(res.errMsg,{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    </script>
+{% endblock bottomfiles %}

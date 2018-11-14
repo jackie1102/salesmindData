@@ -1,0 +1,189 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">58同城</h1>
+    <div style="margin: 30px 0px;">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">关键词搜索</li>
+                    <li>公司名搜索</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <div id="formm" class="layui-col-md8">
+                                <div class="layui-col-md8">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">下载文件名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn1">开始爬虫</button>
+                                </div>
+                            </div>
+                        </form>
+                        <h2 class="site-h1">操作说明</h2>
+                        <ul class="layui-timeline">
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>1.输入文件名（不能为空）</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>2.点击开始爬虫：在弹出浏览器上配置搜索条件</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>3.Pycharm或者CMD中输入ok敲击回车</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <div id="formm" class="layui-col-md8">
+                                <div class="layui-col-md8">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">url</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="base_url" autocomplete="off" class="layui-input" placeholder="请输入爬取url">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">下载文件名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block" style="text-align: left">
+                                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="btn2">保存条件</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block" style="text-align: left">
+                                <button class="layui-btn" id="test">爬取公司信息</button>
+                                <button class="layui-btn" id="test1">爬取招聘信息</button>
+                            </div>
+                        </div>
+                        <h2 class="site-h1">操作说明</h2>
+                        <ul class="layui-timeline">
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>1.输入url（不能为空）</h5>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;url提取方法：打开链接 http://sh.58.com/job/ 在输入框输入任意词汇，复制url将url中key=后面的值替换为{}，
+                                    <br>&nbsp;&nbsp;&nbsp;&nbsp;例如：http://sh.58.com/dongjiadu/job/?key={}&final=1&jump=1</p>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>2.输入文件名（不能为空）</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>3.依次点击保存条件、爬取招聘信息或者公司信息</h5>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript" src="{% static 'js/salesmind/condition_zdao.js' %}"></script>
+    <script type="text/javascript">
+        layui.use(['element','form','upload'], function() {
+            var element = layui.element,form=layui.form,upload=layui.upload;
+            form.on('submit(btn1)', function(data){
+                var param = data.field;
+                var res = post('/spider/spider_wuba_by_keywords/',param);
+                if(res == "0"){
+                    layer.msg("开始爬虫",{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+            form.on('submit(btn2)', function(data){
+                param2 = data.field;
+                layer.msg("已保存",{icon: 1,offset: '100px'});
+                return false;
+            });
+            var uploadInst = upload.render({
+                elem: '#test' //绑定元素
+                ,url: '/spider/spider_wuba_get_company/'//上传接口
+                ,accept:"file"
+                ,exts:'xls|xlsx'
+                ,before:function () {
+                    this.data = param2
+                }
+                ,done: function(res){
+                    if(res.errId == '0'){
+                        layer.msg("上传成功",{icon: 1,offset: '100px'});
+                    }else{
+                        layer.msg(data.errMsg,{icon: 2,offset: '100px'});
+                    }
+                }
+                ,error: function(){}
+            });
+            var uploadInst1 = upload.render({
+                elem: '#test1' //绑定元素
+                ,url: '/spider/spider_wuba_by_company/'//上传接口
+                ,accept:"file"
+                ,exts:'xls|xlsx'
+                ,before:function () {
+                    this.data = param2
+                }
+                ,done: function(res){
+                    if(res.errId == '0'){
+                        layer.msg("上传成功",{icon: 1,offset: '100px'});
+                    }else{
+                        layer.msg(data.errMsg,{icon: 2,offset: '100px'});
+                    }
+                }
+                ,error: function(){}
+            });
+        });
+
+    </script>
+{% endblock bottomfiles %}

@@ -1,0 +1,219 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">IT桔子</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">国内创业公司</li>
+                    <li>国内上市公司</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <div class="layui-col-md8">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">行业</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="industry" id="industry" readonly="readonly" onfocus="open_itjuzi_industry()" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">获投状态</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="state_cast" value="不限" title="不限" checked>
+                                        <input type="radio" name="state_cast" value="15" title="尚未获投">
+                                        <input type="radio" name="state_cast" value="16" title="种子轮">
+                                        <input type="radio" name="state_cast" value="4" title="天使轮">
+                                        <input type="radio" name="state_cast" value="14" title="Pre-A轮">
+                                        <input type="radio" name="state_cast" value="5" title="A轮">
+                                        <input type="radio" name="state_cast" value="17" title="A+轮">
+                                        <input type="radio" name="state_cast" value="18" title="pre-B轮">
+                                        <input type="radio" name="state_cast" value="6" title="B轮">
+                                        <input type="radio" name="state_cast" value="80" title="B+轮">
+                                        <input type="radio" name="state_cast" value="7" title="C轮">
+                                        <input type="radio" name="state_cast" value="23" title="C+轮">
+                                        <input type="radio" name="state_cast" value="8" title="D轮">
+                                        <input type="radio" name="state_cast" value="24" title="D+轮">
+                                        <input type="radio" name="state_cast" value="9" title="E轮">
+                                        <input type="radio" name="state_cast" value="13" title="F轮上市前">
+                                        <input type="radio" name="state_cast" value="10" title="已上市">
+                                        <input type="radio" name="state_cast" value="21" title="新三板">
+                                        <input type="radio" name="state_cast" value="22" title="战略投资">
+                                        <input type="radio" name="state_cast" value="11" title="已被收购">
+                                        <input type="radio" name="state_cast" value="1" title="不明确">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">地区</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="area" value="不限" title="不限" checked>
+                                        <input type="radio" name="area" value="北京" title="北京">
+                                        <input type="radio" name="area" value="上海" title="上海">
+                                        <input type="radio" name="area" value="广东" title="广东">
+                                        <input type="radio" name="area" value="浙江" title="浙江">
+                                        <input type="radio" name="area" value="江苏" title="江苏">
+                                        <input type="radio" name="area" value="天津" title="天津">
+                                        <input type="radio" name="area" value="福建" title="福建">
+                                        <input type="radio" name="area" value="湖北" title="湖北">
+                                        <input type="radio" name="area" value="湖南" title="湖南">
+                                        <input type="radio" name="area" value="四川" title="四川">
+                                        <input type="radio" name="area" value="河北" title="河北">
+                                        <input type="radio" name="area" value="山西" title="山西">
+                                        <input type="radio" name="area" value="内蒙古" title="内蒙古">
+                                        <input type="radio" name="area" value="辽宁" title="辽宁">
+                                        <input type="radio" name="area" value="吉林" title="吉林">
+                                        <input type="radio" name="area" value="黑龙江" title="黑龙江">
+                                        <input type="radio" name="area" value="安徽" title="安徽">
+                                        <input type="radio" name="area" value="山西" title="山西">
+                                        <input type="radio" name="area" value="山东" title="山东">
+                                        <input type="radio" name="area" value="河南" title="河南">
+                                        <input type="radio" name="area" value="广西" title="广西">
+                                        <input type="radio" name="area" value="海南" title="海南">
+                                        <input type="radio" name="area" value="重庆" title="重庆">
+                                        <input type="radio" name="area" value="贵州" title="贵州">
+                                        <input type="radio" name="area" value="云南" title="云南">
+                                        <input type="radio" name="area" value="西藏" title="西藏">
+                                        <input type="radio" name="area" value="陕西" title="陕西">
+                                        <input type="radio" name="area" value="甘肃" title="甘肃">
+                                        <input type="radio" name="area" value="青海" title="青海">
+                                        <input type="radio" name="area" value="宁夏" title="宁夏">
+                                        <input type="radio" name="area" value="新疆" title="新疆">
+                                        <input type="radio" name="area" value="香港" title="香港">
+                                        <input type="radio" name="area" value="澳门" title="澳门">
+                                        <input type="radio" name="area" value="台湾" title="台湾">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">阶段</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="stage" value="不限" title="不限" checked>
+                                        <input type="radio" name="stage" value="1" title="初创期">
+                                        <input type="radio" name="stage" value="2" title="成长发展期">
+                                        <input type="radio" name="stage" value="3" title="上市公司">
+                                        <input type="radio" name="stage" value="4" title="成熟期">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">融资需求</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="financing_demand" value="不限" title="不限" checked>
+                                        <input type="radio" name="financing_demand" value="1" title="需要融资">
+                                        <input type="radio" name="financing_demand" value="2" title="不需要融资">
+                                        <input type="radio" name="financing_demand" value="3" title="寻求被收购">
+                                        <input type="radio" name="financing_demand" value="4" title="不明确">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">成立时间</label>
+                                    <div class="layui-input-block">
+                                        <select name="establish_time">
+                                            <option value="不限">不限</option>
+                                            <option value="2018">2018年</option>
+                                            <option value="2017">2017年</option>
+                                            <option value="2016">2016年</option>
+                                            <option value="2015">2015年</option>
+                                            <option value="2014">2014年</option>
+                                            <option value="2013">2013年</option>
+                                            <option value="2012">2012年</option>
+                                            <option value="2011">2011年</option>
+                                            <option value="2010">2010年</option>
+                                            <option value="2009">2009年</option>
+                                            <option value="2008">2008年</option>
+                                            <option value="2007">2007年</option>
+                                            <option value="2006">2006年</option>
+                                            <option value="2005">2005年</option>
+                                            <option value="2004">2004年</option>
+                                            <option value="2003">2003年</option>
+                                            <option value="2002">2002年</option>
+                                            <option value="2001">2001年</option>
+                                            <option value="2000">2000年</option>
+                                            <option value="<2000"><2000年</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">状态</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="state" value="不限" title="不限" checked>
+                                        <input type="radio" name="state" value="1" title="运营中">
+                                        <input type="radio" name="state" value="2" title="未上线">
+                                        <input type="radio" name="state" value="3" title="已关闭">
+                                        <input type="radio" name="state" value="4" title="已转型">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">跳转页码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="design_page" autocomplete="off" class="layui-input" placeholder="请输入起始页码，默认1">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn1">开始爬虫</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        无
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript" src="{% static 'js/salesmind/condition_itjuzi.js' %}"></script>
+    <script type="text/javascript">
+        layui.use(['element','form'], function() {
+            var element = layui.element,form=layui.form;
+            form.on('submit(btn1)', function(data){
+                var param = data.field;
+                var res = post('/spider/spider_itjuzi_domestic_search/',param);
+                if(res == "0"){
+                    layer.msg("开始爬虫",{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    </script>
+{% endblock bottomfiles %}

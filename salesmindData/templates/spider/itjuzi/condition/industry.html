@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="{% static 'images/salesmind.ico' %}">
+	<link rel="stylesheet" href="{% static 'js/layui/css/layui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/salesmind/common.css' %}">
+    <style>
+        .layui-form-checkbox i {
+            position: absolute;
+            right: 0;
+            width: 0px;
+            color: #fff;
+            font-size: 0px;
+            text-align: center;
+        }
+        .layui-form-checkbox {
+            position: relative;
+            height: 22px;
+            line-height: 20px;
+            margin-right: 0px;
+            padding-right: 0px;
+            border: 1px solid #d2d2d2;
+            cursor: pointer;
+            font-size: 0;
+            border-radius: 2px;
+            -webkit-transition: .1s linear;
+            transition: .1s linear;
+            box-sizing: border-box;
+        }
+        .layui-form-checkbox span {
+            padding: 0 5px;
+            height: 100%;
+            font-size: 10px;
+            background-color: #d2d2d2;
+            color: #fff;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        .layui-form-checked span, .layui-form-checked:hover span {
+            background-color: #5FB878;
+        }
+        .layui-form-item {
+            margin-bottom: 5px;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<div style="padding: 20px;">
+    <form class="layui-form" action="">
+        <div class="layui-row">
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[0]" title="教育" value="1"></h5>
+                        <div class="layui-colla-content" style="min-height: 180px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[1]" title="儿童早教" value="1/3">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[2]" title="K12" value="1/4">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[3]" title="高等教育" value="1/5">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[4]" title="职业培训" value="1/6"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[5]" title="出国留学" value="1/7">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[6]" title="语言学习" value="1/8"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[7]" title="兴趣教育" value="1/9">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[8]" title="教育信息化" value="1/10">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[9]" title="教育综合服务" value="1/11">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[10]" title="其他教育" value="1/180"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[11]" title="教辅设备" value="1/212">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[12]" title="金融" value="12"></h5>
+                        <div class="layui-colla-content" style="min-height: 220px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[13]" title="股票" value="12/13">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[14]" title="借贷" value="12/14">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[15]" title="支付" value="12/15">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[16]" title="保险" value="12/16"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[17]" title="理财" value="12/17">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[18]" title="虚拟货币" value="12/19"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[19]" title="信用及征信" value="12/20"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[20]" title="投融资" value="12/21">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[21]" title="金融信息化" value="12/22">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[22]" title="外汇期货贵金属" value="12/26">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[23]" title="金融综合服务" value="12/27"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[24]" title="其他金融" value="12/181">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[25]" title="彩票" value="12/213"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[26]" title="消费金融" value="12/214">
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[27]" title="汽车交通" value="28"></h5>
+                        <div class="layui-colla-content" style="min-height: 150px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[28]" title="汽车电商" value="28/29">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[29]" title="二手车" value="28/30">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[30]" title="汽车后服务" value="28/31">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[31]" title="交通出行" value="28/32"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[32]" title="车主工具及服务" value="28/35">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[33]" title="汽车金融" value="28/36">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[34]" title="汽车综合服务" value="28/37">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[35]" title="其他汽车服务" value="28/184">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[36]" title="车联网及硬件" value="28/185"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[37]" title="房产服务" value="38"></h5>
+                        <div class="layui-colla-content" style="min-height: 120px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[38]" title="租房" value="38/39">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[39]" title="房产电商" value="38/40">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[40]" title="装修装潢" value="38/41">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[41]" title="房产金融" value="38/42"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[42]" title="商业房产" value="38/43">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[43]" title="房产信息化" value="38/44">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[44]" title="房产综合服务" value="38/46">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[45]" title="其他房产服务" value="38/187"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[46]" title="医疗健康" value="47"></h5>
+                        <div class="layui-colla-content" style="min-height: 150px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[47]" title="医药电商" value="47/48">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[48]" title="寻医诊疗" value="47/49">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[49]" title="健康保健" value="47/50">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[50]" title="医疗信息化" value="47/51"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[51]" title="医生服务" value="47/52"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[52]" title="医疗器械及硬件" value="47/53">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[53]" title="专科服务" value="47/54">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[54]" title="医疗综合服务" value="47/56">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[55]" title="其他医疗服务" value="47/189"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[56]" title="生物技术和制药" value="47/215"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[57]" title="旅游 " value="57"></h5>
+                        <div class="layui-colla-content" style="min-height: 150px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[58]" title="国内游" value="57/58">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[59]" title="跨境游" value="57/61">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[60]" title="旅游信息化" value="57/63">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[61]" title="交通食宿" value="57/64"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[62]" title="景点门票" value="57/65"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[63]" title="主题特色游" value="57/66">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[64]" title="旅游综合服务" value="57/69">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[65]" title="其他旅游服务" value="57/191">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[66]" title="旅游工具及社区" value="57/192"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                      <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[67]" title="本地生活 " value="70"></h5>
+                        <div class="layui-colla-content" style="min-height: 180px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[68]" title="美食餐饮" value="70/71">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[69]" title="家政服务" value="70/72">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[70]" title="小区服务" value="70/73">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[71]" title="美业服务" value="70/74"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[72]" title="婚礼婚庆" value="70/75"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[73]" title="宠物服务" value="70/76"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[74]" title="休闲娱乐" value="70/77">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[75]" title="维修服务" value="70/78">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[76]" title="本地综合生活" value="70/79">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[77]" title="其他生活服务" value="70/193"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[78]" title="商务服务及信息化" value="70/194"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[79]" title="校园服务" value="70/216"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[80]" title="游戏 " value="80"></h5>
+                        <div class="layui-colla-content" style="min-height: 180px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[81]" title="游戏开发商" value="80/81">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[82]" title="其他游戏服务" value="80/87">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[83]" title="游戏媒体及社区" value="80/88">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[84]" title="游戏综合服务" value="80/94"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[85]" title="游戏发行及渠道" value="80/196">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[86]" title="游戏道具衍生品" value="80/219">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[87]" title="游戏硬件" value="80/220">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[88]" title="游戏直播及玩家" value="80/221"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                      <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[89]" title="广告营销 " value="95"></h5>
+                        <div class="layui-colla-content" style="min-height: 90px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[90]" title="移动及网络广告" value="95/96">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[91]" title="传统广告" value="95/97">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[92]" title="整合营销传播" value="95/99">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[93]" title="广告技术" value="95/101">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[94]" title="其他广告" value="95/197">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[95]" title="广告平台" value="95/217">
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[96]" title="硬件" value="103"></h5>
+                        <div class="layui-colla-content" style="min-height: 180px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[97]" title="智能家居" value="103/104">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[98]" title="消费电子" value="103/105">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[99]" title="芯片半导体" value="103/106">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[100]" title="机器人" value="103/108"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[101]" title="3D打印" value="103/109">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[102]" title="传感器及中间件" value="103/110"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[103]" title="飞行器" value="103/111">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[104]" title="车载及出行" value="103/112">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[105]" title="综合硬件" value="103/114">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[106]" title="其他硬件服务" value="103/199"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[107]" title="可穿戴设备" value="103/218">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[108]" title="新能源新材料" value="103/254">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[109]" title="文化娱乐" value="115"></h5>
+                        <div class="layui-colla-content" style="min-height: 180px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[110]" title="影视" value="115/116">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[111]" title="动漫" value="115/117">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[112]" title="艺术" value="115/118">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[113]" title="设计及创意" value="115/119"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[114]" title="媒体及阅读" value="115/120">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[115]" title="音乐" value="115/121"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[116]" title="IP知识产权" value="115/122">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[117]" title="视频" value="115/124">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[118]" title="综合文娱" value="115/125"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[119]" title="演艺" value="115/200">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[120]" title="其他文娱服务" value="115/201"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[121]" title="图片照片" value="115/222">
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[122]" title="企业服务" value="115/126"></h5>
+                        <div class="layui-colla-content" style="min-height: 210px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[123]" title="办公OA" value="115/127">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[124]" title="销售营销" value="115/128">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[125]" title="人力资源" value="115/129">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[126]" title="法律服务" value="115/130"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[127]" title="IT基础设施" value="115/131">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[128]" title="行业信息化及解决方案" value="115/132"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[129]" title="综合企业服务" value="115/134">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[130]" title="其他企业服务" value="115/203">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[131]" title="财务税务" value="115/247">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[132]" title="企业安全" value="115/248">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[133]" title="数据服务" value="115/249"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[134]" title="客户服务" value="115/250"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[135]" title="B2D开发者服务" value="115/251">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[136]" title="黑科技及前沿技术" value="115/257">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[137]" title="社交网络" value="115/135"></h5>
+                        <div class="layui-colla-content" style="min-height: 150px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[138]" title="婚恋交友" value="115/136">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[139]" title="陌生人交友" value="115/137">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[140]" title="家庭熟人社交" value="115/138">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[141]" title="商务社交" value="115/139"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[142]" title="同性社交" value="115/140">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[143]" title="兴趣社区" value="115/142">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[144]" title="校园社交" value="115/143">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[145]" title="综合社交" value="115/144"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[147]" title="其他社交" value="115/204">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[148]" title="女性社群" value="115/231">
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[149]" title="电子商务" value="145"></h5>
+                        <div class="layui-colla-content" style="min-height: 210px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[150]" title="生鲜食品" value="145/147">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[151]" title="跨境电商" value="145/148"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[152]" title="奢侈品" value="145/150"/>
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[153]" title="医疗器械及硬件" value="145/151">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[154]" title="3C电子" value="145/152">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[155]" title="化妆品" value="145/153">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[156]" title="母婴玩具" value="145/154"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[157]" title="家居家纺" value="145/155"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[158]" title="珠宝首饰" value="145/156">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[159]" title="数字虚拟商品" value="145/157"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[160]" title="电商解决方案" value="145/159"/>
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[161]" title="综合电商" value="145/160">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[162]" title="大宗商品" value="145/178">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[163]" title="其他电商服务" value="145/205">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[164]" title="图书影音" value="145/232"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[165]" title="工具软件 " value="161"></h5>
+                        <div class="layui-colla-content" style="min-height: 210px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[166]" title="搜索引擎" value="161/162">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[167]" title="事项及效率" value="161/163">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[168]" title="浏览器" value="161/164">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[169]" title="系统工具" value="161/165"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[170]" title="安全隐私" value="161/166"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[171]" title="综合工具服务" value="161/167"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[172]" title="其他工具" value="161/207"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[173]" title="主题特色游" value="161/240">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[174]" title="旅游综合服务" value="161/241">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[175]" title="其他旅游服务" value="161/242">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[176]" title="旅游工具及社区" value="161/243"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[177]" title="交通食宿" value="161/244"/>
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[178]" title="景点门票" value="161/245"/>
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[179]" title="景点门票" value="161/246"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                      <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[180]" title="体育运动 " value="210"></h5>
+                        <div class="layui-colla-content" style="min-height: 120px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[181]" title="大众健身" value="210/224">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[182]" title="赛事运营及经济" value="210/225">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[183]" title="户外及极限运动" value="210/226">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[184]" title="体育设施及场馆" value="210/227"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[185]" title="体育媒体及社区" value="210/228">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[186]" title="其他体育服务" value="210/229">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[187]" title="综合体育" value="210/230">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[188]" title="体育用品及装备" value="210/255"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[189]" title="物流 " value="211"></h5>
+                        <div class="layui-colla-content" style="min-height: 120px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[190]" title="货运物流" value="211/233">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[191]" title="同城配送" value="211/234">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[192]" title="跨境物流" value="211/235">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[193]" title="品牌快递" value="211/236"/>
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[194]" title="游戏发行及渠道" value="211/237">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[195]" title="游戏道具衍生品" value="211/238">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[196]" title="游戏硬件" value="211/239">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[197]" title="游戏直播及玩家" value="211/256"/>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+
+                      <div class="layui-colla-item">
+                        <h5 class="layui-colla-title"><input type="checkbox" name="itindustry[198]" title="农业 " value="258"></h5>
+                        <div class="layui-colla-content" style="min-height: 150px;">
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                              <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[199]" title="农业生物技术" value="258/259">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[200]" title="新型农业系统" value="258/260">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[201]" title="农业电商" value="258/261">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[202]" title="农机农资及装备" value="258/262">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[203]" title="种植养殖" value="258/263">
+                                </div>
+                            </div>
+                            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[204]" title="农技服务" value="258/264">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[205]" title="三农金融" value="258/265">
+                                </div>
+                                <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[206]" title="农业媒体及社区" value="258/266">
+                                </div>
+                                 <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[207]" title="其他农业" value="258/267">
+                                </div>
+                                   <div class="layui-form-item">
+                                    <input type="checkbox" name="itindustry[208]" title="综合农业" value="258/268">
+                                </div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: right;padding-top: 20px;margin-bottom: 0px;">
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit="" lay-filter="btn">确定</button>
+                    <button  class="layui-btn layui-btn-normal layui-btn-sm" type="button" onclick="_close()">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layui/layui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/salesmind/common.js' %}"></script>
+<script type="text/javascript">
+    layui.use(['element','form'], function() {
+        var element = layui.element,form=layui.form;
+        form.on('submit(btn)', function(data){
+            var params = data.field;
+            if(Object.keys(params).length > 1){
+                layer.msg('最多添加1个',{icon: 2,offset: '100px'});
+                return false;
+            }
+            var value="";
+            for(var k in params){
+                value += params[k] +",";
+            }
+            parent.$("#industry").val(value);
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            return false;
+        });
+        });
+    function _close() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            font-family: 新宋体;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+            letter-spacing: 5px;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+        }
+        .search{
+            width: 40%;
+            height:38px;
+            position: relative;
+            margin: 0 auto;
+        }
+        .layui-this{
+            color: rgb(0, 153, 255)!important;
+        }
+        .layui-tab-title{
+            display: -webkit-flex;
+        }
+        .layui-tab-title li{
+            flex:1;
+        }
+        .search ul{
+            width: 100%;
+            display: block;
+            position: absolute;
+            left: 0;
+            top:40px;
+            background-color: #fff;
+            z-index: 10;
+        }
+        #comple li{
+            width:100%;
+            height:40px;
+            padding: 5px 10px;
+            line-height: 30px;
+            box-sizing: border-box;
+            border-bottom:1px solid #eee;
+        }
+        #comple li:hover{
+            background-color: #eee;
+        }
+        .search input:first-child{
+            height: 38px;
+            padding:5px 10px;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        .search .search_btn{
+            position: absolute;
+            right:0px;
+            top:0px;
+        }
+        .sea{
+            height: 30px;
+        }
+        .msg_asso{
+            padding:30px 0px;
+            text-align: left;
+        }
+        .msg_asso h3{
+            height:80px;
+        }
+        .msg_asso ul{
+            overflow: hidden;
+            z-index: 10;
+            margin-bottom: 150px;
+        }
+        .msg_asso ul li{
+            float: left;
+            width: 20%;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+        }
+        .msg_asso ul li a{
+            font-size: 16px;
+        }
+        a:hover{
+            {#background: #dddddd;#}
+            color: red;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <script type="text/javascript" src="{% static 'js/jquery/jquery-3.2.1.min.js' %}"></script>
+    <div style="margin-bottom: 50px;">
+        <h1 class="site-h1">爬虫分类</h1>
+        <div class="search">
+            <input id="entry" autofocus autocomplete="off" type="text" value="" placeholder="请输入......">
+            <input id="search-fn" class="layui-btn layui-btn-normal search_btn" type="button" value="搜索">
+            <div id="word"></div>
+            <ul id="comple">
+        </ul>
+        </div>
+        <div class="search-result" style="padding-top:50px;overflow:hidden;padding-left:5%;">
+            <ul class="search-title" style="float: left;margin-right: 10%;font-weight:bold;"></ul>
+            <ul class="search-cont" style="float: left;"></ul>
+        </div>
+    </div>
+    <div class="layui-tab">
+        <ul class="layui-tab-title">
+            <li class="layui-this">招聘后台</li>
+            <li>爬虫公司名单</li>
+            <li>通过职位爬取公司名单</li>
+            <li>爬取基础信息</li>
+            <li>爬取其他信息</li>
+            <li>投融资平台</li>
+        </ul>
+        <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+                <div class="msg_asso">
+                    <ul class="first">
+                        <li><a href="/spider/zhaopin/">智联招聘</a></li>
+                        <li><a href="/spider/job51/">前程无忧</a></li>
+                        <li><a href="/spider/liepin/">猎聘网</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="msg_asso">
+                    <ul class="sencond">
+                        <li><a href="/spider/lagou/">拉勾网</a></li>
+                        <li><a href="/spider/shunqi/">顺企网</a></li>
+                        <li><a href="/spider/atubo/">阿土伯</a></li>
+                        <li><a href="/spider/wutong/">物通网</a></li>
+                        <li><a href="/spider/jincheng/">锦程物流网</a></li>
+                        <li><a href="#">IT桔子</a></li>
+                        <li><a href="#">1688</a></li>
+                        <li><a href="/spider/maigoo/">买够网</a></li>
+                        <li><a href="/spider/qichacha/">企查查</a></li>
+                        <li><a href="/spider/qichacha_/">企查查(new)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="msg_asso">
+                    <ul class="third">
+                        <li><a href="/spider/zdao/">早稻-职位</a></li>
+                        <li><a href="/spider/zhilian_recruit/">智联-职位</a></li>
+                        <li><a href="/spider/wuba_recruit/">58同城-职位</a></li>
+                        <li><a href="/spider/ganji_recruit/">赶集网-职位</a></li>
+                        <li><a href="/spider/recruit_51job/">前程无忧-职位</a></li>
+                        <li><a href="/spider/baidubaipin/">百度百聘-职位</a></li>
+                        <li><a href="/spider/liepin_prev/">猎聘-职位</a></li>
+                        <li><a href="/spider/boss/">BOSS直聘-职位</a></li>
+                        <li><a href="/spider/recruit_51job/">51job-职位</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="msg_asso">
+                    <ul class="fourth">
+                        <li><a href="/spider/mergespider/">合并采集</a></li>
+                        <li><a href="/spider/zhilian51/">百度智联-公司</a></li>
+                        <li><a href="/spider/zhilian51/">百度51-公司</a></li>
+                        <li><a href="/spider/zhiyouji/">职友集-公司</a></li>
+                        <li><a href="/spider/lagou/">拉勾网-公司</a></li>
+                        <li><a href="/spider/liepin_prev/">猎聘网-公司</a></li>
+                        <li><a href="/spider/qymgc/">企业梦工厂-公司</a></li>
+                        <li><a href="/spider/kanzhunwang/">看准网-公司</a></li>
+                        <li><a href="/spider/qichacha/">企查查-公司</a></li>
+                        <li><a href="/spider/tianyancha/">天眼查-公司</a></li>
+                        <li><a href="/spider/wuba_company/">58同城-公司</a></li>
+                        <li><a href="/spider/sole/">51Sole-公司</a></li>
+                        <li><a href="/spider/ganji_recruit/">赶集网-公司</a></li>
+                        <li><a href="/spider/boss/">BOSS直聘-公司</a></li>
+                        <li><a href="#">商理事-公司</a></li>
+                        <li><a href="#">东方财富-公司</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="msg_asso">
+                    <ul class="fifth">
+                        <li><a href="/spider/baidu/">百度官网</a></li>
+                        <li><a href="#">ICP官网</a></li>
+                        <li><a href="/spider/email/">官网邮箱</a></li>
+                        <li><a href="/spider/baidubaipin/">百度百聘-招聘</a></li>
+                        <li><a href="/spider/baixingwang/">百姓网</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-tab-item">
+                <div class="msg_asso">
+                    <ul class="sixth">
+                        <li><a href="#">拉勾网-融资</a></li>
+                        <li><a href="#">IT桔子-融资</a></li>
+                        <li><a href="#">创业谱</a></li>
+                        <li><a href="#">创业邦</a></li>
+                        <li><a href="#">新芽</a></li>
+                        <li><a href="#">因果树</a></li>
+                        <li><a href="#">烯牛数据</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        layui.use(['element','table','jquery'], function() {
+            var element = layui.element,table = layui.table,$ = layui.jquery;
+        });
+        {#$('#entry').keyup(function(){#}
+			{#var keywords = $(this).val();#}
+        {#    var dt = {#}
+			{#    keyword: keywords#}
+        {#    }#}
+			{#if (keywords=='') { $('#comple').slideUp(100);return};#}
+			{#$.ajax({#}
+			{#	url: '/spider/spidername/',#}
+			{#	data: dt,#}
+        {#        type:"POST",#}
+			{#	dataType: 'json',#}
+			{#	success:function(data){#}
+			{#		$('#comple').empty().slideDown(0);#}
+			{#		$.each(data.values, function(){#}
+        {#                $('#comple').append('<li class="click_work">'+ this +'</li>');#}
+			{#		})#}
+			{#	},#}
+        {#        error:function(data){#}
+			{#	     console.log(data)#}
+        {#        }});})#}
+        //点击搜索数据复制给搜索框
+        // ($('#entry').val()=='') { $('#comple').slideUp(100);};
+        {#$(document).on('click',function(){#}
+                {#$('#comple').slideUp(100);});#}
+		$(function(){
+		    $(document).on('click','.click_work',function(){
+			var word = $(this).text();
+			$('#entry').val(word);
+			$('#comple').slideUp(100);
+		});
+            $('#search-fn').on('click',function(){
+                if($('#entry').val() === ""){
+                    $('.search-cont').empty();
+                    $('.search-title').empty();
+                    return;
+                }
+                var allMsg = [].slice.call($('.layui-tab-content li'));
+                var keywords = $('#entry').val();
+                $('.search-cont').empty();
+                $('.search-title').empty();
+                allMsg.map(function(res){
+                    if(res.innerText.indexOf(keywords) != -1){
+                        if($(res).parent()[0].className === "first"){
+                            $('.search-title').append('<li class="sea">招聘后台 ： </li>')
+                        }else if($(res).parent()[0].className === "sencond"){
+                            $('.search-title').append('<li class="sea">爬虫公司名单 ： </li>')
+                        }else if($(res).parent()[0].className === "third"){
+                            $('.search-title').append('<li class="sea">通过职位爬取公司名单 ： </li>')
+                        }else if($(res).parent()[0].className === "fourth"){
+                            $('.search-title').append('<li class="sea">爬取基础信息 ： </li>')
+                        }else if($(res).parent()[0].className === "fifth"){
+                            $('.search-title').append('<li class="sea">爬取其他信息 ： </li>')
+                        }else if($(res).parent()[0].className === "sixth"){
+                            $('.search-title').append('<li class="sea">投融资平台 ： </li>')
+                        }
+                        var li = $(res).clone()
+                        li.addClass("sea");
+                        $('.search-cont').append(li);
+                    }
+                })
+            })
+            $(document).keydown(function(e){
+                if($('#entry').val() === ""){
+                    $('.search-cont').empty();
+                    $('.search-title').empty();
+                    return;
+                };
+                if(e.which === 13){
+                    $("#search-fn").click();
+                }
+            })
+        })
+    </script>
+{% endblock bottomfiles %}

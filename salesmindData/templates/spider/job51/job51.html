@@ -1,0 +1,943 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">前程无忧</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">关键词搜索</li>
+                    <li>公司名搜索</li>
+                    <li>简历ID搜索</li>
+                    <li>已下载简历ID搜索</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="24">
+                            <div class="layui-col-md7" style="border-right: 1px solid lightgray">
+                                <div class="layui-col-md9">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">关键词/ID</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="keywords" autocomplete="off" class="layui-input"
+                                                   placeholder="可输入简历ID、职位名、学校名、证书、IT技能、语言等">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">地区</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="areas" id="area" readonly="readonly"
+                                                   onfocus="open_job51_area(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">行业</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="industrys" id="industry" readonly="readonly"
+                                                   onfocus="open_job51_industry(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">职能</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="jobs" id="job" readonly="readonly"
+                                                   onfocus="open_job51_jobs(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">期望工作地</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="exp_areas" id="exp_area" readonly="readonly"
+                                                   onfocus="open_job51_exp_area(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="major" id="major" readonly="readonly"
+                                                   onfocus="open_job51_major(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;口</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="residence" id="residence" readonly="readonly"
+                                                   onfocus="open_job51_residence(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">更新时间</label>
+                                        <div class="layui-input-block">
+                                            <select name="update_time">
+                                                <option value="近1周">近1周</option>
+                                                <option value="近2周">近2周</option>
+                                                <option value="近1个月">近1个月</option>
+                                                <option value="近2个月">近2个月</option>
+                                                <option value="近6个月">近6个月</option>
+                                                <option value="近1年">近1年</option>
+                                                <option value="1年及以上">1年及以上</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">跳转页码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="design_page" autocomplete="off" class="layui-input"
+                                                   placeholder="请输入起始页码,默认为1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md3">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">任一关键词</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="any_key" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">含期望地区</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="content_exp_area" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">搜最近行业</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="onlyIndustry" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">搜最近职能</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="only_fun" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md5">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">年龄</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <input type="text" name="age_min" autocomplete="off" class="layui-input">
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <input type="text" name="age_max" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">性别</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="sex" value="不限" title="不限" checked>
+                                        <input type="radio" name="sex" value="男" title="男">
+                                        <input type="radio" name="sex" value="女" title="女">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">期望月薪</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="exp_wages_from">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="exp_wages_to">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">目前月薪</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="wages_from">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="wages_to">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">语&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;言</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="language">
+                                                <option value="不限">不限</option>
+                                                <option value="英语">英语</option>
+                                                <option value="日语">日语</option>
+                                                <option value="俄语">俄语</option>
+                                                <option value="阿拉伯语">阿拉伯语</option>
+                                                <option value="法语">法语</option>
+                                                <option value="德语">德语</option>
+                                                <option value="西班牙语">西班牙语</option>
+                                                <option value="葡萄牙语">葡萄牙语</option>
+                                                <option value="意大利语">意大利语</option>
+                                                <option value="韩语/朝鲜语">韩语/朝鲜语</option>
+                                                <option value="普通话">普通话</option>
+                                                <option value="粤语">粤语</option>
+                                                <option value="闽南语">闽南语</option>
+                                                <option value="上海话">上海话</option>
+                                                <option value="其他">其他</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="language_level">
+                                                <option value="不限">不限</option>
+                                                <option value="一般">一般</option>
+                                                <option value="良好">良好</option>
+                                                <option value="熟练">熟练</option>
+                                                <option value="精通">精通</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">英语等级</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <select name="englishlevel">
+                                            <option value="不限">不限</option>
+                                            <option value="英语四级以上">英语四级以上</option>
+                                            <option value="英语六级以上">英语六级以上</option>
+                                            <option value="专业四级以上">专业四级以上</option>
+                                            <option value="八级以上">八级以上</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">求职状态</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <select name="state">
+                                            <option value="不限">不限</option>
+                                            <option value="目前正在找工作">目前正在找工作</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">包含至今</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="contain_zhijin" lay-skin="primary">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="layui-col-md4">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">51会员名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="membername_job51" id="membername_job51"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">51用户名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="username_job51" id="username_job51"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">51密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="password_job51" id="password_job51"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">工作年限</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="job_start_year">
+                                                <option value="不限">不限</option>
+                                                <option value="无工作经验">无工作经验</option>
+                                                <option value="一年">一年</option>
+                                                <option value="二年">二年</option>
+                                                <option value="三年">三年</option>
+                                                <option value="五年">五年</option>
+                                                <option value="八年">八年</option>
+                                                <option value="十年">十年</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="job_end_year">
+                                                <option value="不限">不限</option>
+                                                <option value="无工作经验">无工作经验</option>
+                                                <option value="一年">一年</option>
+                                                <option value="二年">二年</option>
+                                                <option value="四年">四年</option>
+                                                <option value="七年">七年</option>
+                                                <option value="九年">九年</option>
+                                            </select>
+                                        </div>
+                                        <label class="layui-form-label">海外经验</label>
+                                        <input type="checkbox" name="seaswork" lay-skin="primary">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">学 历</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="education_start">
+                                                <option value="不限">不限</option>
+                                                <option value="初中及以下">初中及以下</option>
+                                                <option value="高中/中技/中专">高中/中技/中专</option>
+                                                <option value="大专">大专</option>
+                                                <option value="本科">本科</option>
+                                                <option value="硕士">硕士</option>
+                                                <option value="MBA">MBA</option>
+                                                <option value="博士">博士</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="education_end">
+                                                <option value="不限">不限</option>
+                                                <option value="初中及以下">初中及以下</option>
+                                                <option value="高中/中技/中专">高中/中技/中专</option>
+                                                <option value="大专">大专</option>
+                                                <option value="本科">本科</option>
+                                                <option value="硕士">硕士</option>
+                                                <option value="博士">博士</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" name="edu_type[0]" lay-skin="primary" title="985"
+                                           value="985">
+                                    <input type="checkbox" name="edu_type[1]" lay-skin="primary" title="211"
+                                           value="211">
+                                    <input type="checkbox" name="edu_type[2]" lay-skin="primary" title="全日制"
+                                           value="全日制">
+                                    <input type="checkbox" name="edu_type[3]" lay-skin="primary" title="海外留学"
+                                           value="海外留学">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="33">
+                            <div class="layui-col-md7" style="border-right: 1px solid lightgray">
+                                <div class="layui-col-md9">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">关键词/ID</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="keywords" autocomplete="off" class="layui-input"
+                                                   placeholder="可输入简历ID、职位名、学校名、证书、IT技能、语言等">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">地区</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="areas" id="area2" readonly="readonly"
+                                                   onfocus="open_job51_area(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">行业</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="industrys" id="industry2" readonly="readonly"
+                                                   onfocus="open_job51_industry(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">职能</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="jobs" id="job2" readonly="readonly"
+                                                   onfocus="open_job51_jobs(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">期望工作地</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="exp_areas" id="exp_area2" readonly="readonly"
+                                                   onfocus="open_job51_exp_area(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">专&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="major" id="major2" readonly="readonly"
+                                                   onfocus="open_job51_major(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">户&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;口</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="residence" id="residence2" readonly="readonly"
+                                                   onfocus="open_job51_residence(this.id)" class="layui-input">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">更新时间</label>
+                                        <div class="layui-input-block">
+                                            <select name="update_time">
+                                                <option value="近1周">近1周</option>
+                                                <option value="近2周">近2周</option>
+                                                <option value="近1个月">近1个月</option>
+                                                <option value="近2个月">近2个月</option>
+                                                <option value="近6个月">近6个月</option>
+                                                <option value="近1年">近1年</option>
+                                                <option value="1年及以上">1年及以上</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">跳转页码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="design_page" autocomplete="off" class="layui-input"
+                                                   placeholder="请输入起始页码,默认为1">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md3">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">任一关键词</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="any_key" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">期望地区</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="exp_area" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">搜最近行业</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="onlyIndustry" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">搜最近职能</label>
+                                        <div class="layui-input-block">
+                                            <input type="checkbox" name="only_fun" lay-skin="primary">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md5">
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">年龄</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <input type="text" name="age_min" autocomplete="off" class="layui-input">
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <input type="text" name="age_max" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">性别</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="sex" value="不限" title="不限" checked>
+                                        <input type="radio" name="sex" value="男" title="男">
+                                        <input type="radio" name="sex" value="女" title="女">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">期望月薪</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="exp_wages_from">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="exp_wages_to">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">目前月薪</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="wages_from">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="wages_to">
+                                                <option value="不限">不限</option>
+                                                <option value="1.5k">1.5k</option>
+                                                <option value="2k">2k</option>
+                                                <option value="3k">3k</option>
+                                                <option value="4.5k">4.5k</option>
+                                                <option value="6k">6k</option>
+                                                <option value="8k">8k</option>
+                                                <option value="10k">10k</option>
+                                                <option value="15k">15k</option>
+                                                <option value="20k">20k</option>
+                                                <option value="25k">25k</option>
+                                                <option value="30k">30k</option>
+                                                <option value="40k">40k</option>
+                                                <option value="50k">50k</option>
+                                                <option value="70k">70k</option>
+                                                <option value="100k">100k</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">语&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;言</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="language">
+                                                <option value="不限">不限</option>
+                                                <option value="英语">英语</option>
+                                                <option value="日语">日语</option>
+                                                <option value="俄语">俄语</option>
+                                                <option value="阿拉伯语">阿拉伯语</option>
+                                                <option value="法语">法语</option>
+                                                <option value="德语">德语</option>
+                                                <option value="西班牙语">西班牙语</option>
+                                                <option value="葡萄牙语">葡萄牙语</option>
+                                                <option value="意大利语">意大利语</option>
+                                                <option value="韩语/朝鲜语">韩语/朝鲜语</option>
+                                                <option value="普通话">普通话</option>
+                                                <option value="粤语">粤语</option>
+                                                <option value="闽南语">闽南语</option>
+                                                <option value="上海话">上海话</option>
+                                                <option value="其他">其他</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="language_level">
+                                                <option value="不限">不限</option>
+                                                <option value="一般">一般</option>
+                                                <option value="良好">良好</option>
+                                                <option value="熟练">熟练</option>
+                                                <option value="精通">精通</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">英语等级</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <select name="englishlevel">
+                                            <option value="不限">不限</option>
+                                            <option value="英语四级以上">英语四级以上</option>
+                                            <option value="英语六级以上">英语六级以上</option>
+                                            <option value="专业四级以上">专业四级以上</option>
+                                            <option value="八级以上">八级以上</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">求职状态</label>
+                                    <div class="layui-input-inline" style="width: 100px;">
+                                        <select name="state">
+                                            <option value="不限">不限</option>
+                                            <option value="目前正在找工作">目前正在找工作</option>
+                                            <option value="其他">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">包含至今</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="contain_zhijin" lay-skin="primary">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="layui-col-md4">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">51会员名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="membername_job51" id="membername_job51"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">51用户名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="username_job51" id="username_job51"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-md4">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">51密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="password_job51" id="password_job51"
+                                                   autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">工作年限</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="job_start_year">
+                                                <option value="不限">不限</option>
+                                                <option value="无工作经验">无工作经验</option>
+                                                <option value="一年">一年</option>
+                                                <option value="二年">二年</option>
+                                                <option value="三年">三年</option>
+                                                <option value="四年">四年</option>
+                                                <option value="五年">五年</option>
+                                                <option value="八年">八年</option>
+                                                <option value="十年">十年</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="job_end_year">
+                                                <option value="不限">不限</option>
+                                                <option value="无工作经验">无工作经验</option>
+                                                <option value="一年">一年</option>
+                                                <option value="二年">二年</option>
+                                                <option value="三年">三年</option>
+                                                <option value="四年">四年</option>
+                                                <option value="五年">五年</option>
+                                                <option value="八年">八年</option>
+                                                <option value="及以上">及以上</option>
+                                            </select>
+                                        </div>
+                                        <label class="layui-form-label">海外经验</label>
+                                        <input type="checkbox" name="seaswork" lay-skin="primary">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">学 历</label>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="education_start">
+                                                <option value="不限">不限</option>
+                                                <option value="初中及以下">初中及以下</option>
+                                                <option value="高中/中技/中专">高中/中技/中专</option>
+                                                <option value="大专">大专</option>
+                                                <option value="本科">本科</option>
+                                                <option value="硕士">硕士</option>
+                                                <option value="MBA">MBA</option>
+                                                <option value="博士">博士</option>
+                                            </select>
+                                        </div>
+                                        <div class="layui-form-mid">-</div>
+                                        <div class="layui-input-inline" style="width: 100px;">
+                                            <select name="education_end">
+                                                <option value="不限">不限</option>
+                                                <option value="初中及以下">初中及以下</option>
+                                                <option value="高中/中技/中专">高中/中技/中专</option>
+                                                <option value="大专">大专</option>
+                                                <option value="本科">本科</option>
+                                                <option value="硕士">硕士</option>
+                                                <option value="博士">博士</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <input type="checkbox" name="edu_type[0]" lay-skin="primary" title="985"
+                                           value="985">
+                                    <input type="checkbox" name="edu_type[1]" lay-skin="primary" title="211"
+                                           value="211">
+                                    <input type="checkbox" name="edu_type[2]" lay-skin="primary" title="全日制"
+                                           value="全日制">
+                                    <input type="checkbox" name="edu_type[3]" lay-skin="primary" title="海外留学"
+                                           value="海外留学">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="35">
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">51会员名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="membername_job51" id="membername_job51_three"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">51用户名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="username_job51" id="username_job51_three"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">51密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="password_job51" id="password_job51_three"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" id="table_name" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="51">
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">51会员名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="membername_job51" id="membername_job51_three"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">51用户名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="username_job51" id="username_job51_three"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">51密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="password_job51" id="password_job51_three"
+                                               autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">爬取类型</label>
+                                    <div class="layui-input-block">
+                                        <input type="radio" name="type" lay-skin="primary" title="ID" value="2" checked>
+                                        <input type="radio" name="type" lay-skin="primary" title="手机" value="4">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" id="table_name" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript" src="{% static 'js/salesmind/condition_job51.js' %}"></script>
+    <script type="text/javascript">
+        layui.use(['element', 'form'], function () {
+            var form = layui.form;
+            form.on('submit(btn)', function (data) {
+                var param = data.field;
+                if (param.table_name != '') {
+                    var res = post('/spider/create_task/', param);
+                    if (res.errId == "0") {
+                        layer.msg("创建成功", {icon: 1, offset: '100px'});
+                    } else {
+                        layer.msg(res.errMsg, {icon: 2, offset: '100px'});
+                    }
+                } else {
+                    layer.msg('下载文件名不可为空', {icon: 2, offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    </script>
+{% endblock bottomfiles %}

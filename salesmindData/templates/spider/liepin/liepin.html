@@ -1,0 +1,243 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">猎聘</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">关键词搜索</li>
+                    <li>公司/ID搜索</li>
+                    <li>已下载ID搜索</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="6">
+                            <div class="layui-col-md7">
+                                <div class="layui-col-md9">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">配置参数</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="param" autocomplete="off" class="layui-input"
+                                                   placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">账号</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="username" autocomplete="off"
+                                                   class="layui-input" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">密码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="password" autocomplete="off"
+                                                   class="layui-input" placeholder="">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">跳转页码</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="start_page" autocomplete="off" class="layui-input"
+                                                   value="1">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">所 有 工 作</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="all_work" disabled="disabled" lay-skin="switch">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">只 采 列 表</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="type" lay-skin="switch">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="9">
+                            <div class="layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">配置参数</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="param" autocomplete="off" class="layui-input"
+                                               placeholder="请输入简历关键词，多关键词可用空格分隔">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">账号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="username" autocomplete="off"
+                                               class="layui-input" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="password" autocomplete="off"
+                                               class="layui-input" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">所 有 工 作</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="all_work" disabled="disabled" lay-skin="switch">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">只 采 列 表</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="type" lay-skin="switch">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="49">
+                            <div class="layui-col-md6">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">账号</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="username" autocomplete="off"
+                                               class="layui-input" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">密码</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="password" autocomplete="off"
+                                               class="layui-input" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="site-h1">操作说明</h2>
+        <ul class="layui-timeline">
+            <li>
+                <div style="margin-left: 20px">
+                    <h5>1.输入配置参数（不能为空）</h5>
+                    <p>&nbsp;&nbsp;&nbsp;&nbsp;配置参数提取方法：登录猎聘，跳转条件搜索页面，填写搜索条件，填写完毕，按F12或者右键点击检查，在页面上点击搜索，
+                        <br>&nbsp;&nbsp;&nbsp;&nbsp;在Network中找到 search.json 连接点击，然后在右侧 headers 最下方找到 Form Data 点击 view
+                        source 然后复制内容。</p>
+                </div>
+            </li>
+            <li>
+                <div style="margin-left: 20px">
+                    <h5>2.输入登陆cookie：登陆以后浏览器中复制（不能为空）</h5>
+                </div>
+            </li>
+            <li>
+                <div style="margin-left: 20px">
+                    <h5>3.配置其他条件</h5>
+                </div>
+            </li>
+            <li>
+                <div style="margin-left: 20px">
+                    <h5>4.点击生成任务</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        layui.use(['element', 'upload', 'form'], function () {
+            var form = layui.form;
+            form.on('submit(btn)', function (data) {
+                var param = data.field;
+                if (param.table_name != '') {
+                    var res = post('/spider/create_task/', param);
+                    if (res.errId == "0") {
+                        layer.msg("创建成功", {icon: 1, offset: '100px'});
+                    } else {
+                        layer.msg(res.errMsg, {icon: 2, offset: '100px'});
+                    }
+                } else {
+                    layer.msg('下载文件名不可为空', {icon: 2, offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    </script>
+{% endblock bottomfiles %}

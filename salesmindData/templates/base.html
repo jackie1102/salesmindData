@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+	<meta charset="utf-8">
+	 {# 网页title标题块 #}
+	<title>{% block title %}{% endblock title %}</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="{% static 'images/salesmind.ico' %}">
+	<link rel="stylesheet" href="{% static 'js/layui/css/layui.css' %}">
+    <style>
+        .layui-nav .layui-nav-item a {
+            color:white;
+        }
+    </style>
+    {# 网页顶部引入文件块 #}
+    {% block topfiles %}
+        <link rel="stylesheet" href="{% static 'css/salesmind/common.css' %}">
+    {% endblock topfiles %}
+    {% block stylecss %}{% endblock stylecss %}
+</head>
+<body>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<div class="layui-layout layui-layout-admin">
+    {# 顶部信息块 #}
+    {% block mainHeader %}
+        <div class="layui-header">
+            <div class="layui-logo" style="position: static;float: left;display: inline-block;line-height: 50px">
+                <a href="/spider/index/">
+                    <img src="{% static 'images/home.png' %}" style="width: 80%">
+                </a>
+            </div>
+            <ul class="layui-nav"  lay-filter="test" style="float: left;">
+                <li class="layui-nav-item">
+                    <a class="" href="/spider/index/" style="font-size: 18px">爬虫首页</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="/spider/reptile/" style="font-size: 18px">爬虫分类</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="/sysuser/dataC" style="font-size: 18px">数据清洗</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="/sysuser/mytask/" style="font-size: 18px" >我的任务</a>
+                </li>
+                <li class="layui-nav-item ">
+                    <a href="/sysuser/updatelog" style="font-size: 18px">更新日志</a>
+                </li>
+            </ul>
+            <ul class="layui-nav layui-layout-right">
+                <li class="layui-nav-item">
+                    <a href="javascript:;">
+                        <img src="{% static 'images/sysUserphoto/header.png' %}" class="layui-nav-img">
+                        {{ request.session.nikename }}
+                    </a>
+                    <dl class="layui-nav-child">
+                        <dd><a style="color: #0C0C0C" href="${ctx}/user/toBasicInfo">基本资料</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item"><a id ="aLogout" href="#">退出</a></li>
+            </ul>
+        </div>
+    {% endblock mainHeader %}
+    {# 左侧树形菜单 #}
+{#    {% block mainSidebar %}#}
+{#        <div class="layui-side layui-bg-black">#}
+{#            <div class="layui-side-scroll">#}
+{#            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->#}
+{#    #}
+{#            </div>#}
+{#        </div>#}
+{#    {% endblock mainSidebar %}#}
+    <div class="" style="background-color: #e6e6e6">
+        <!-- 内容主体区域 -->
+        <div style="padding: 20px;">
+            <div style="background-color: #fff;padding: 20px;">
+                {% block body %}{% endblock body %}
+            </div>
+        </div>
+    </div>
+    {% block mainFooter %}
+        <div class="layui-footer" style="left: 0;text-align: center">
+            <span>
+                <strong>Copyright &copy; 2016-2017<a href="http://www.salesmind.cn">上海门迪智能科技有限公司</a>.</strong> All rights reserved.
+            </span>
+            <span style="text-align: right"><b>版本</b>1.0.0</span>
+        </div>
+    {% endblock mainFooter %}
+</div>
+<script type="text/javascript" src="{% static 'js/jquery/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layui/layui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/salesmind/common.js' %}"></script>
+{# 底部引入文件块 #}
+	{% block bottomfiles %}{% endblock bottomfiles %}
+</body>
+</html>

@@ -1,0 +1,447 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+
+        .laytable-cell-1-spider_id {
+            padding: 0;
+        }
+
+        #task_list .data {
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            outline: none;
+            border: #ebebe4 1px solid;
+
+        }
+
+        #title {
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            background-color: #0C0C0C;
+            color: #f2f2f2;
+        }
+
+        #task_list th, td {
+            box-sizing: border-box;
+            height: 100%;
+            padding: 5px 0;
+            border: #ebebe4 1px solid;
+        }
+
+        .layui-btn-normal {
+            background: #ffffff;
+            color: #1E9FFF;
+            border: 1px solid #1E9FFF;
+        }
+
+        .layui-btn-normal:hover {
+            color: #ffffff;
+            background: #1E9FFF;
+        }
+
+        .active {
+            color: #ffffff;
+            background: #1E9FFF;
+        }
+
+        .layui-btn-danger {
+            background: #ffffff;
+            color: #FF5722;
+            border: 1px solid #FF5722;
+        }
+
+        .layui-btn-danger:hover {
+            color: #ffffff;
+            background: #FF5722;
+        }
+
+        .opera1 .layui-btn {
+            width: 25%;
+        }
+
+        .opera2 .layui-btn {
+            width: 25%;
+        }
+
+        .demo_class {
+            white-space: nowrap;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <div style="margin-bottom: 30px;">
+        <h1 class="site-h1">更多操作</h1>
+        <div id="task_list" style="width:100%;overflow:auto">
+            <table style="width: 100%;margin: auto;">
+                <tr id="title">
+                    <th class="title" style="width: 5%">id</th>
+                    <th class="title" style="width: 5%">爬虫ID</th>
+                    <th class="title" style="width: 10%">爬虫</th>
+                    <th class="title" style="width: 10%">开始时间</th>
+                    <th class="title" style="width: 8%">采集URL</th>
+                    <th class="title" style="width: 8%">数据采集</th>
+                    <th class="title" style="width: 14%">采集url/上传文件</th>
+                    <th class="title" style="width: 14%">详情采集</th>
+                    <th class="title" style="width: 8%">返回</th>
+                </tr>
+                <tr class="task" id="{{ task.task_id }}">
+                    <td class="data" style="width: 5%">{{ task.task_id }}</td>
+                    <td class="data" style="width: 5%">{{ task.spider_id }}</td>
+                    <td class="data" style="width: 10%">{{ task.table_name }}</td>
+                    <td class="data" style="width: 10%">{{ task.start_time }}</td>
+                    <td id="{{ task.task_id }}_1" class="data" style="width: 8%">{{ task.state_1 }}</td>
+                    <td id="{{ task.task_id }}_2" class="data" style="width: 8%">{{ task.state_2 }}</td>
+                    <td class="opera1 data company" spider_id="{{ task.spider_id }}" style="width: 14%;display: none">
+                        <span id="upload{{ task.task_id }}"
+                              class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" type="button">上传</span>
+                        <span class="layui-btn layui-btn-xs layui-btn-radius layui-btn-disabled"
+                              style="margin-left: 10px">停止</span>
+                        <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs"
+                              onclick="clear_data({{ task.task_id }})">清空</span>
+                    </td>
+                    <td class="opera1 data condition" spider_id="{{ task.spider_id }}"
+                        style="width: 14%;display: none;">
+                        <span class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs"
+                              onclick="start1({{ task }})" type="button">开始</span>
+                        <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs"
+                              onclick="stop1({{ task }})" type="button">停止</span>
+                        <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs"
+                              onclick="clear_data({{ task.task_id }})">清空</span>
+                    </td>
+                    <td class="opera2 data" style="width: 14%">
+                        <span class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs" type="button"
+                              onclick="start2({{ task }})">开始</span>
+                        <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs" type="button"
+                              onclick="stop2({{ task }})">停止</span>
+                    </td>
+                    <td class="data" style="width: 8%">
+                        <a class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs" type="button"
+                           href="{{ request.session.url_pre }}">return</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="operation" style="margin: 20px 0;text-align: center">
+            <button id="show_param" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-ms">查看参数</button>
+            <button id="alter_param" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-ms">修改参数</button>
+            <button id="show_data" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-ms">查看数据</button>
+            <button id="downfile" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-ms"
+                    onclick="downfile({{ task }})">下载数据
+            </button>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        var task = {{ task | safe }}
+            $(function () {
+                {#[].slice.call($(".condition")).map(function (res) {#}
+                {#    if ($(res).attr("spider_id") % 2 == 0) {#}
+                {#        $(res).show();#}
+                {#    }});#}
+                {#[].slice.call($(".company")).map(function (res) {#}
+                {#    if ($(res).attr("spider_id") % 2 == 1 || $(res).attr("spider_id").indexOf('c') != -1) {#}
+                {#        $(res).show();#}
+                {#    }});#}
+                [].slice.call($(".condition")).map(function (res) {
+                    var spiderid = $(res).attr("spider_id");
+                    if (spiderid.indexOf('a') != -1) {
+                        spiderid = spiderid.replace('a', '');
+                        if (spiderid % 2 == 0) {
+                            $(res).show();
+                        }
+                    } else {
+                        if (spiderid % 2 == 0) {
+                            $(res).show();
+                        }
+                    }
+                });
+                [].slice.call($(".company")).map(function (res) {
+                    var spiderid = $(res).attr("spider_id");
+                    if (spiderid.indexOf("c") != -1) {
+                        $(res).show();
+
+                    }
+                    if (spiderid.indexOf('a') != -1) {
+                        spiderid = spiderid.replace('a', '');
+                        if (spiderid % 2 == 1) {
+                            $(res).show();
+                        }
+                    } else {
+                        if (spiderid % 2 == 1) {
+                            $(res).show();
+                        }
+                    }
+                });
+                layui.use(['element'], function () {
+                    var element = layui.element;
+                });
+                {#if (task.spider_id % 2 == 1 || task.spider_id.indexOf('c') != -1) {#}
+                {#    upload(task.task_id,#}
+                {#        {#}
+                {#            'spider_id': task.spider_id,#}
+                {#            'task_id': task.task_id,#}
+                {#            'table_name': task.table_name#}
+                {#        })}#}
+                var spiderid = task.spider_id;
+                if (spiderid.indexOf('a') != -1) {
+                    spiderid = spiderid.replace('a', '')
+                    if (spiderid % 2 == 1 || spiderid.indexOf('c') != -1) {
+                        upload(task.task_id, {
+                            'spider_id': task.spider_id,
+                            'task_id': task.task_id,
+                            'table_name': task.table_name
+                        })
+                    }
+                } else {
+                    if (spiderid % 2 == 1 || spiderid.indexOf('c') != -1) {
+                        upload(task.task_id, {
+                            'spider_id': task.spider_id,
+                            'task_id': task.task_id,
+                            'table_name': task.table_name
+                        })
+                    }
+                }
+            });
+
+        function downfile(task) {
+            var ele = document.getElementById(task.task_id + '_2');
+            var status = ele.innerText.replace(/\s+/g,"");
+            var down_status = document.getElementById('download' + task.task_id);
+            if (status == "运行中" || status == "未启动") {
+                layer.msg("当前状态不可下载", {icon: 2, offset: '100px'});
+                return;
+            } else {
+                var task_id = task.task_id;
+                window.location = "/spider/down_file/?task_id=" + task_id;
+                down_status.innerText = '已下载'
+            }
+        }
+
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element, layer = layui.layer;
+            $("#show_param").click(function () {
+                var data = post('/spider/show_param/', {"task_id": task.task_id});
+                if (data.errId == 0) {
+                    layer.open({
+                        title: '参数展示',
+                        type: 1,
+                        area: ['910px', '400px'],
+                        content: '<textarea id="Data" style="width:908px;height:295px;" warp="virtual">' + data.param + '</textarea>',
+                        btn: ['复制'],
+                        yes: function () {
+                            var Node = document.getElementById("Data");
+                            Node.select(); // 选择对象
+                            document.execCommand("Copy");
+                        }
+                    });
+                } else {
+                    layer.msg('服务器错误')
+                }
+            });
+        });
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element, layer = layui.layer;
+            $("#alter_param").click(function () {
+                layer.open({
+                    title: '参数修改',
+                    type: 2,
+                    area: ['910px', '400px'],
+                    content: '/spider/open_alter_param/?id=' + task.task_id
+                });
+            });
+        });
+
+        layui.use(['element', 'layer'], function () {
+            var element = layui.element, layer = layui.layer;
+            $("#show_data").click(function () {
+                var data = post('/spider/show_data/', {"task_id": task.task_id});
+                if (data.errId == 0) {
+                    layer.open({
+                        skin: 'demo_class',
+                        title: '数据展示',
+                        type: 1,
+                        area: ['910px', '400px'],
+                        content: data.item
+                    });
+                } else {
+                    layer.msg('服务器错误')
+                }
+            });
+        });
+
+        function clear_data(task_id) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element;
+                layer.open({
+                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                    content: "<p style='text-align: center'>确定要清空吗</p>",
+                    offset: '100px',
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    yes: function (index) {
+                        layer.close(index);
+                        var data = post('/spider/clear_data/', {'task_id': task_id});
+                        if (data.errId == 0) {
+                            layer.open({
+                                title: ['提示', 'padding-left:80px;text-align: center;'],
+                                content: "<p style='text-align: center'>清除成功</p>",
+                                offset: '100px',
+                                btn: ['确定'],
+                                btnAlign: 'c',
+                                yes: function (index) {
+                                    layer.close(index);
+                                    var state1 = document.getElementById(task_id + '_1');
+                                    var state2 = document.getElementById(task_id + '_2');
+                                    var download_status = document.getElementById('download' + task_id);
+                                    state1.innerText = '未启动';
+                                    state2.innerText = '未启动';
+                                    download_status.innerText = '下载';
+                                    element.progress(task_id + '_demo', '0%')
+                                }
+                            });
+                        } else {
+                            layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                        }
+                    },
+                    btn2: function (index) {
+                        layer.close(index)
+                    }
+                });
+            })
+        }
+
+        function start1(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var data = post("/spider/start_task1/", {
+                    'spider_id': task.spider_id,
+                    'task_id': task.task_id,
+                    'table_name': task.table_name
+                });
+                if (data.errId == 0) {
+                    layer.open({
+                        title: ['提示', 'padding-left:80px;text-align: center;'],
+                        content: "<p style='text-align: center'>启动成功</p>",
+                        offset: '100px',
+                        btn: ['确定'],
+                        btnAlign: 'c',
+                        yes: function (index) {
+                            layer.close(index);
+                            var state1 = document.getElementById(task.task_id + '_1');
+                            state1.innerText = '运行中';
+                        }
+                    });
+                } else {
+                    layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                }
+            })
+        }
+
+        function stop1(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                layer.open({
+                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                    content: "<p style='text-align: center'>停止后不可继续，确定要停止吗？</p>",
+                    offset: '100px',
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    yes: function (index) {
+                        layer.close(index)
+                        var status = task.state_1;
+                        if (status != '运行中') {
+                            layer.msg("当前状态停止无效", {icon: 2, offset: '100px'});
+                        } else {
+                            var data = post("/spider/stop_task1/", {'task_id': task.task_id});
+                            if (data.errId == 0) {
+                                layer.open({
+                                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                                    content: "<p style='text-align: center'>停止成功</p>",
+                                    offset: '100px',
+                                    btn: ['确定'],
+                                    btnAlign: 'c',
+                                    yes: function (index) {
+                                        layer.close(index);
+                                        var state1 = document.getElementById(task.task_id + '_1');
+                                        state1.innerText = '已中断';
+                                    }
+                                });
+                            } else {
+                                layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                            }
+                        }
+                    }, btn2: function (index) {
+                        layer.close(index)
+                    }
+                });
+            })
+        }
+
+        function start2(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var data = post("/spider/start_task2/", {
+                    'spider_id': task.spider_id,
+                    'task_id': task.task_id,
+                    'table_name': task.table_name
+                });
+                if (data.errId == 0) {
+                    layer.open({
+                        title: ['提示', 'padding-left:80px;text-align: center;'],
+                        content: "<p style='text-align: center'>启动成功</p>",
+                        offset: '100px',
+                        btn: ['确定'],
+                        btnAlign: 'c',
+                        yes: function (index) {
+                            layer.close(index);
+                            var state2 = document.getElementById(task.task_id + '_2');
+                            state2.innerText = '运行中';
+                        }
+                    });
+                } else {
+                    layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                }
+            })
+        }
+
+        function stop2(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var ele = document.getElementById(task.task_id + '_2');
+                var status = ele.innerText.replace(/\s+/g,"");
+                if (status != '运行中') {
+                    layer.msg("当前状态停止无效", {icon: 2, offset: '100px'});
+                } else {
+                    var data = post("/spider/stop_task2/", {'task_id': task.task_id});
+                    if (data.errId == 0) {
+                        layer.open({
+                            title: ['提示', 'padding-left:80px;text-align: center;'],
+                            content: "<p style='text-align: center'>停止成功</p>",
+                            offset: '100px',
+                            btn: ['确定'],
+                            btnAlign: 'c',
+                            yes: function (index) {
+                                layer.close(index);
+                                var state2 = document.getElementById(task.task_id + '_2');
+                                state2.innerText = '已中断';
+                            }
+                        });
+                    } else {
+                        layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                    }
+                }
+            })
+        }
+    </script>
+{% endblock bottomfiles %}

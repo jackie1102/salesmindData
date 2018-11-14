@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">百度百聘</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">关键词搜索</li>
+                    <li>公司名搜索</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="8">
+                            <div id="formm" class="layui-col-md8">
+                                <div class="layui-col-md8">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">起始url</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="base_url" autocomplete="off" class="layui-input" placeholder="输入起始url">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">下载文件名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">开始爬虫</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="11">
+                            <div id="formm" class="layui-col-md8">
+                                <div class="layui-col-md8">
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">条件url</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="base_url" autocomplete="off" class="layui-input" placeholder="输入条件url">
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">下载文件名</label>
+                                        <div class="layui-input-block">
+                                            <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn">开始爬虫</button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <h2 class="site-h1">操作说明</h2>
+                        <ul class="layui-timeline">
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>1.url获取方法：</h5>
+                                    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;打开链接 https://zhaopin.baidu.com/quanzhi?query= 然后选择条件， 在输入框输入 a 点击搜索 <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;按下F12打开控制台，选择 Network 选项，清空下方内容，点击XHR，在页面上点击下一页，在下方找到 qzasync <br>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;开头的链接点击，在右方headers 里面找到 Request URL , 复制即可
+                                    </p>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>2.输入文件名</h5>
+                                </div>
+                            </li>
+                            <li>
+                                <div style="margin-left: 20px">
+                                    <h5>3.点击生成任务</h5>
+                                </div>
+                            </li>
+                        </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        layui.use(['element','form'], function() {
+            var form=layui.form;
+            form.on('submit(btn)', function(data){
+                var param=data.field;
+                if (param.table_name != ''){
+                    var res = post('/spider/create_task/',param);
+                    if(res.errId =="0"){
+                        layer.msg("创建成功",{icon: 1,offset: '100px'});
+                    }else{
+                        layer.msg(res.errMsg,{icon: 2,offset: '100px'});
+                    }
+                }else{
+                    layer.msg('下载文件名不可为空',{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    </script>
+{% endblock bottomfiles %}

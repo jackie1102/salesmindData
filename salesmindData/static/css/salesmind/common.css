@@ -1,0 +1,41 @@
+a{
+    color:#128bed;
+}
+a:hover{
+    color:#128bed;
+}
+h1{
+    font-size: 24px;
+}
+h2{
+    font-size: 22px;
+}
+h3{
+    font-size: 20px;
+}
+h4{
+    font-size: 18px;
+}
+h5{
+    font-size: 16px;
+}
+h6{
+    font-size: 14px;
+}
+.menus>ul>li{
+    display: inline-block;
+    height: 55.5px;
+}
+.menus>ul>li>img {
+    height: 100%;
+}
+
+.footer{
+    height: auto;
+    width: 100%;
+    background-color: #ddd;
+    position: fixed;
+    bottom: 0;
+}
+
+

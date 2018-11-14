@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{% load staticfiles %}
+<head>
+    <meta charset="utf-8">
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="{% static 'images/salesmind.ico' %}">
+	<link rel="stylesheet" href="{% static 'js/layui/css/layui.css' %}">
+    <link rel="stylesheet" href="{% static 'css/salesmind/common.css' %}">
+    <style>
+        .layui-form-checkbox i {
+            position: absolute;
+            right: 0;
+             width: 0px;
+            color: #fff;
+            font-size: 0px;
+            text-align: center;
+        }
+        .layui-form-checkbox {
+            position: relative;
+            height: 30px;
+            line-height: 28px;
+            margin-right: 0px;
+            padding-right: 0px;
+            border: 1px solid #d2d2d2;
+            cursor: pointer;
+            font-size: 0;
+            border-radius: 2px;
+            -webkit-transition: .1s linear;
+            transition: .1s linear;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+<!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+<!--[if lt IE 9]>
+<script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+<script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<div style="padding: 20px;">
+    <form class="layui-form" action="">
+        <div class="layui-row">
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                <div class="layui-collapse" lay-accordion>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">哲学类</h5>
+                        <div class="layui-colla-content" style="min-height: 80px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[1]" title="哲学类" value="哲学类-哲学类">
+                                <input type="checkbox" name="industry[2]" title="哲学(含伦理学)" value="哲学类-哲学(含伦理学)">
+                                <input type="checkbox" name="industry[3]" title="逻辑学" value="哲学类-逻辑学">
+                                <input type="checkbox" name="industry[4]" title="宗教学" value="哲学类-宗教学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">经济学类</h5>
+                        <div class="layui-colla-content" style="min-height: 80px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[11]" title="经济学类" value="经济学类-经济学类">
+                                <input type="checkbox" name="industry[12]" title="经济学" value="经济学类-经济学">
+                                <input type="checkbox" name="industry[13]" title="国际经济与贸易" value="经济学类-国际经济与贸易">
+                                <input type="checkbox" name="industry[14]" title="财经学" value="经济学类-财经学">
+                                <input type="checkbox" name="industry[15]" title="金融学" value="经济学类-金融学">
+                                <input type="checkbox" name="industry[5]" title="经济管理" value="经济学类-经济管理">
+                                <input type="checkbox" name="industry[6]" title="经济信息管理" value="经济学类-经济信息管理">
+                                <input type="checkbox" name="industry[7]" title="贸易经济" value="经济学类-贸易经济">
+                                <input type="checkbox" name="industry[8]" title="国际金融" value="经济学类-国际金融">
+                                <input type="checkbox" name="industry[9]" title="投资学" value="经济学类-投资学">
+                                <input type="checkbox" name="industry[24]" title="统计学" value="经济学类-统计学">
+                                <input type="checkbox" name="industry[25]" title="经济与金融" value="经济学类-经济与金融">
+                                <input type="checkbox" name="industry[26]" title="金融工程" value="经济学类-金融工程">
+                                <input type="checkbox" name="industry[27]" title="保险" value="经济学类-保险">
+                                <input type="checkbox" name="industry[28]" title="税务" value="经济学类-税务">
+                                <input type="checkbox" name="industry[29]" title="信用管理" value="经济学类-信用管理">
+                                <input type="checkbox" name="industry[30]" title="网络经济学" value="经济学类-网络经济学">
+                                <input type="checkbox" name="industry[31]" title="技术经济" value="经济学类-技术经济">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">管理科学与工程类</h5>
+                        <div class="layui-colla-content" style="min-height: 105px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[32]" title="管理科学与工程类" value="管理科学与工程类-管理科学与工程类">
+                                <input type="checkbox" name="industry[33]" title="管理科学" value="管理科学与工程类-管理科学">
+                                <input type="checkbox" name="industry[34]" title="信息管理和信息系统" value="管理科学与工程类-信息管理和信息系统">
+                                <input type="checkbox" name="industry[35]" title="工业工程" value="管理科学与工程类-工业工程">
+                                <input type="checkbox" name="industry[36]" title="工程管理" value="管理科学与工程类-工程管理">
+                                <input type="checkbox" name="industry[37]" title="产品质量工程" value="管理科学与工程类-产品质量工程">
+                                <input type="checkbox" name="industry[38]" title="项目管理" value="管理科学与工程类-项目管理">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">工商管理类</h5>
+                        <div class="layui-colla-content" style="min-height: 80px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[39]" title="工商管理类" value="工商管理类-工商管理类">
+                                <input type="checkbox" name="industry[40]" title="工商管理" value="工商管理类-工商管理">
+                                <input type="checkbox" name="industry[46]" title="市场营销" value="工商管理类-市场营销">
+                                <input type="checkbox" name="industry[47]" title="会计学" value="工商管理类-会计学">
+                                <input type="checkbox" name="industry[48]" title="财务管理" value="工商管理类-财务管理">
+                                <input type="checkbox" name="industry[49]" title="会计信息系统" value="工商管理类-会计信息系统">
+                                <input type="checkbox" name="industry[52]" title="涉外会计" value="工商管理类-涉外会计">
+                                <input type="checkbox" name="industry[53]" title="国际商务" value="工商管理类-国际商务">
+                                <input type="checkbox" name="industry[54]" title="物流管理" value="工商管理类-物流管理">
+                                <input type="checkbox" name="industry[55]" title="财政金融" value="工商管理类-财政金融">
+                                <input type="checkbox" name="industry[56]" title="企业管理" value="工商管理类-企业管理">
+                                <input type="checkbox" name="industry[57]" title="商品学" value="工商管理类-商品学">
+                                <input type="checkbox" name="industry[58]" title="资产评估" value="工商管理类-资产评估">
+                                <input type="checkbox" name="industry[59]" title="商务策划管理" value="工商管理类-商务策划管理">
+                                 <input type="checkbox" name="industry[60]" title="连锁经营管理" value="工商管理类-连锁经营管理">
+                                <input type="checkbox" name="industry[61]" title="审计学" value="工商管理类-审计学">
+                                <input type="checkbox" name="industry[62]" title="电子商务" value="工商管理类-电子商务">
+                                <input type="checkbox" name="industry[63]" title="房地产经营管理" value="工商管理类-房地产经营管理">
+                                <input type="checkbox" name="industry[64]" title="物业管理" value="工商管理类-物业管理">
+                                <input type="checkbox" name="industry[65]" title="旅游管理" value="工商管理类-旅游管理">
+                                <input type="checkbox" name="industry[66]" title="酒店管理" value="工商管理类-酒店管理">
+                                <input type="checkbox" name="industry[69]" title="人力资源管理" value="工商管理类-人力资源管理">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">行政管理、公共管理类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[83]" title="行政管理、公共管理类" value="行政管理、公共管理类-行政管理、公共管理类">
+                                <input type="checkbox" name="industry[70]" title="行政管理" value="行政管理、公共管理类-行政管理">
+                                <input type="checkbox" name="industry[71]" title="公共事业管理" value="行政管理、公共管理类-公共事业管理">
+                                <input type="checkbox" name="industry[72]" title="劳动与社会保障" value="行政管理、公共管理类-劳动与社会保障">
+                                <input type="checkbox" name="industry[73]" title="土地资源管理" value="行政管理、公共管理类-土地资源管理">
+                                <input type="checkbox" name="industry[76]" title="公共关系学" value="行政管理、公共管理类-公共关系学">
+                                <input type="checkbox" name="industry[77]" title="公共政策学" value="行政管理、公共管理类-公共政策学">
+                                <input type="checkbox" name="industry[78]" title="国防教育与管理" value="行政管理、公共管理类-国防教育与管理">
+                                <input type="checkbox" name="industry[79]" title="劳动关系" value="行政管理、公共管理类-劳动关系">
+                                <input type="checkbox" name="industry[80]" title="城市规划与管理" value="行政管理、公共管理类-城市规划与管理">
+                                <input type="checkbox" name="industry[81]" title="食品经济管理" value="行政管理、公共管理类-食品经济管理">
+                                <input type="checkbox" name="industry[82]" title="会展经济与管理" value="行政管理、公共管理类-会展经济与管理">
+                                <input type="checkbox" name="industry[84]" title="文化产业管理" value="行政管理、公共管理类-文化产业管理">
+                                <input type="checkbox" name="industry[85]" title="体育产业管理" value="行政管理、公共管理类-体育产业管理">
+                                <input type="checkbox" name="industry[86]" title="航运管理" value="行政管理、公共管理类-航运管理">
+                                <input type="checkbox" name="industry[87]" title="文秘" value="行政管理、公共管理类-文秘">
+                                <input type="checkbox" name="industry[87]" title="农业经济管理" value="行政管理、公共管理类-农业经济管理">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">图书档案学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[89]" title="图书档案学类" value="图书档案学类-图书档案学类">
+                                <input type="checkbox" name="industry[90]" title="图书馆学和档案学" value="图书档案学类-图书馆学和档案学">
+                                <input type="checkbox" name="industry[91]" title="信息资源管理" value="图书档案学类-信息资源管理">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">语言文学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[105]" title="语言文学类" value="语言文学类-语言文学类">
+                                <input type="checkbox" name="industry[92]" title="汉语言文学" value="语言文学类-汉语言文学">
+                                <input type="checkbox" name="industry[93]" title="英语" value="语言文学类-英语">
+                                <input type="checkbox" name="industry[94]" title="俄语" value="语言文学类-俄语">
+                                <input type="checkbox" name="industry[95]" title="德语" value="语言文学类-德语">
+                                <input type="checkbox" name="industry[96]" title="法语" value="语言文学类-法语">
+                                <input type="checkbox" name="industry[97]" title="日语" value="语言文学类-日语">
+                                <input type="checkbox" name="industry[98]" title="西班牙语" value="语言文学类-西班牙语">
+                                <input type="checkbox" name="industry[99]" title="阿拉伯语" value="语言文学类-阿拉伯语">
+                                <input type="checkbox" name="industry[100]" title="朝鲜语" value="语言文学类-朝鲜语">
+                                <input type="checkbox" name="industry[101]" title="其它外语" value="语言文学类-其它外语">
+                                <input type="checkbox" name="industry[102]" title="外贸英语" value="语言文学类-外贸英语">
+                                <input type="checkbox" name="industry[103]" title="商务英语" value="语言文学类-商务英语">
+                                <input type="checkbox" name="industry[104]" title="对外汉语" value="语言文学类-对外汉语">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">新闻传播学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[105]" title="新闻传播学类" value="新闻传播学类-新闻传播学类">
+                                <input type="checkbox" name="industry[106]" title="新闻学" value="新闻传播学类-新闻学">
+                                <input type="checkbox" name="industry[107]" title="广播电视新闻" value="新闻传播学类-广播电视新闻">
+                                <input type="checkbox" name="industry[108]" title="广告学" value="新闻传播学类-广告学">
+                                <input type="checkbox" name="industry[109]" title="编辑出版学" value="新闻传播学类-编辑出版学">
+                                <input type="checkbox" name="industry[110]" title="传播学" value="新闻传播学类-传播学">
+                                <input type="checkbox" name="industry[111]" title="媒体创意" value="新闻传播学类-媒体创意">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">艺术类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[112]" title="艺术类" value="艺术类-艺术类">
+                                <input type="checkbox" name="industry[113]" title="音乐，作曲" value="艺术类-音乐，作曲">
+                                <input type="checkbox" name="industry[114]" title="艺术设计" value="艺术类-艺术设计">
+                                <input type="checkbox" name="industry[115]" title="戏剧，表演" value="艺术类-戏剧，表演">
+                                <input type="checkbox" name="industry[116]" title="导演，广播电视编导" value="艺术类-导演，广播电视编导">
+                                <input type="checkbox" name="industry[117]" title="戏剧影视文学" value="艺术类-戏剧影视文学">
+                                <input type="checkbox" name="industry[118]" title="戏剧影视美术设计" value="艺术类-戏剧影视美术设计">
+                                <input type="checkbox" name="industry[119]" title="摄影，动画" value="艺术类-摄影，动画">
+                                <input type="checkbox" name="industry[120]" title="播音，主持，录音" value="艺术类-播音，主持，录音">
+                                <input type="checkbox" name="industry[121]" title="服装设计" value="艺术类-服装设计">
+                                <input type="checkbox" name="industry[122]" title="舞蹈" value="艺术类-舞蹈">
+                                <input type="checkbox" name="industry[123]" title="美术学" value="艺术类-美术学">
+                                <input type="checkbox" name="industry[124]" title="绘画" value="艺术类-绘画">
+                                <input type="checkbox" name="industry[125]" title="雕塑" value="艺术类-雕塑">
+                                <input type="checkbox" name="industry[126]" title="影视学" value="艺术类-影视学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">电气信息类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[127]" title="电气信息类" value="电气信息类-电气信息类">
+                                <input type="checkbox" name="industry[128]" title="电气工程及其自动化" value="电气信息类-电气工程及其自动化">
+                                <input type="checkbox" name="industry[129]" title="电气信息工程" value="电气信息类-电气信息工程">
+                                <input type="checkbox" name="industry[130]" title="通信工程" value="电气信息类-通信工程">
+                                <input type="checkbox" name="industry[131]" title="自动化" value="电气信息类-自动化">
+                                <input type="checkbox" name="industry[132]" title="电子信息工程" value="电气信息类-电子信息工程">
+                                <input type="checkbox" name="industry[133]" title="电子科学与技术" value="电气信息类-电子科学与技术">
+                                <input type="checkbox" name="industry[134]" title="集成电路设计与集成系统" value="电气信息类-集成电路设计与集成系统">
+                                <input type="checkbox" name="industry[135]" title="影视艺术技术" value="电气信息类-影视艺术技术">
+                                <input type="checkbox" name="industry[136]" title="广播电视工程" value="电气信息类-广播电视工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">材料类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[137]" title="材料类" value="材料类-材料类">
+                                <input type="checkbox" name="industry[138]" title="冶金工程" value="材料类-冶金工程">
+                                <input type="checkbox" name="industry[139]" title="金属材料工程" value="材料类-金属材料工程">
+                                <input type="checkbox" name="industry[140]" title="无机非金属材料工程" value="材料类-无机非金属材料工程">
+                                <input type="checkbox" name="industry[141]" title="高分子材料与工程" value="材料类-高分子材料与工程">
+                                <input type="checkbox" name="industry[142]" title="材料物理" value="材料类-材料物理">
+                                <input type="checkbox" name="industry[143]" title="材料化学" value="材料类-材料化学">
+                                <input type="checkbox" name="industry[144]" title="材料科学与工程" value="材料类-材料科学与工程">
+                                <input type="checkbox" name="industry[145]" title="电子封装技术" value="材料类-电子封装技术">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">计算机科学与技术类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[146]" title="计算机科学与技术类" value="计算机科学与技术类-计算机科学与技术类">
+                                <input type="checkbox" name="industry[147]" title="计算机科学与技术" value="计算机科学与技术类-计算机科学与技术">
+                                <input type="checkbox" name="industry[148]" title="计算机科学" value="计算机科学与技术类-计算机科学">
+                                <input type="checkbox" name="industry[149]" title="计算机工程" value="计算机科学与技术类-计算机工程">
+                                <input type="checkbox" name="industry[150]" title="计算机网络" value="计算机科学与技术类-计算机网络">
+                                <input type="checkbox" name="industry[151]" title="计算机应用" value="计算机科学与技术类-计算机应用">
+                                <input type="checkbox" name="industry[152]" title="软件工程" value="计算机科学与技术类-软件工程">
+                                <input type="checkbox" name="industry[153]" title="计算机信息管理" value="计算机科学与技术类-计算机信息管理">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">机械类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[154]" title="机械类" value="机械类-机械类">
+                                <input type="checkbox" name="industry[155]" title="机械设计制造及其自动化" value="机械类-机械设计制造及其自动化">
+                                <input type="checkbox" name="industry[156]" title="材料成型及控制工程" value="机械类-材料成型及控制工程">
+                                <input type="checkbox" name="industry[157]" title="工业设计" value="机械类-工业设计">
+                                <input type="checkbox" name="industry[158]" title="过程装备与控制工程" value="机械类-过程装备与控制工程">
+                                <input type="checkbox" name="industry[159]" title="机械电子工程/机电一体化" value="机械类-机械电子工程/机电一体化">
+                                <input type="checkbox" name="industry[160]" title="模具设计与制造" value="机械类-模具设计与制造">
+                                <input type="checkbox" name="industry[161]" title="机械制造工艺与设备" value="机械类-机械制造工艺与设备">
+                                <input type="checkbox" name="industry[162]" title="机械工程及自动化" value="机械类-机械工程及自动化">
+                                <input type="checkbox" name="industry[163]" title="制造工程" value="机械类-制造工程">
+                                <input type="checkbox" name="industry[164]" title="制造自动化与测控技术" value="机械类-制造自动化与测控技术">
+                                <input type="checkbox" name="industry[165]" title="微机电系统工程" value="机械类-微机电系统工程">
+                                <input type="checkbox" name="industry[166]" title="车辆工程" value="机械类-车辆工程">
+                                <input type="checkbox" name="industry[167]" title="汽车服务工程" value="机械类-汽车服务工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">土建类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[168]" title="土建类" value="土建类-土建类">
+                                <input type="checkbox" name="industry[169]" title="建筑学" value="土建类-建筑学">
+                                <input type="checkbox" name="industry[170]" title="城市规划" value="土建类-城市规划">
+                                <input type="checkbox" name="industry[171]" title="土木工程" value="土建类-土木工程">
+                                <input type="checkbox" name="industry[172]" title="建筑环境与设备工程" value="土建类-建筑环境与设备工程">
+                                <input type="checkbox" name="industry[173]" title="给排水科学与工程" value="土建类-给排水科学与工程">
+                                <input type="checkbox" name="industry[174]" title="工业与民用建筑" value="土建类-工业与民用建筑">
+                                <input type="checkbox" name="industry[175]" title="室内装潢设计" value="土建类-室内装潢设计">
+                                <input type="checkbox" name="industry[176]" title="建筑工程" value="土建类-建筑工程">
+                                <input type="checkbox" name="industry[177]" title="工程造价管理" value="土建类-工程造价管理">
+                                <input type="checkbox" name="industry[178]" title="景观学" value="土建类-景观学">
+                                <input type="checkbox" name="industry[179]" title="道路与桥梁" value="土建类-道路与桥梁">
+                                <input type="checkbox" name="industry[180]" title="供热通风与空调工程" value="土建类-供热通风与空调工程">
+                                <input type="checkbox" name="industry[181]" title="历史建筑保护工程" value="土建类-历史建筑保护工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">岸工程</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[182]" title="岸工程" value="岸工程-岸工程">
+                                <input type="checkbox" name="industry[183]" title="测绘工程" value="岸工程-测绘工程">
+                                <input type="checkbox" name="industry[184]" title="遥感科学与技术" value="岸工程-遥感科学与技术">
+                                <input type="checkbox" name="industry[185]" title="空间信息与数字技术" value="岸工程-空间信息与数字技术">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">仪器仪表类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[186]" title="仪器仪表类" value="仪器仪表类-仪器仪表类">
+                                <input type="checkbox" name="industry[187]" title="测控技术与仪器" value="仪器仪表类-测控技术与仪器">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">能源动力类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[188]" title="能源动力类" value="能源动力类-能源动力类">
+                                <input type="checkbox" name="industry[189]" title="热能与动力工程" value="能源动力类-热能与动力工程">
+                                <input type="checkbox" name="industry[190]" title="核工程与核技术" value="能源动力类-核工程与核技术">
+                                <input type="checkbox" name="industry[191]" title="电力系统及自动化" value="能源动力类-电力系统及自动化">
+                                <input type="checkbox" name="industry[192]" title="制冷与低温技术" value="能源动力类-制冷与低温技术">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">水利类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[193]" title="水利类" value="水利类-水利类">
+                                <input type="checkbox" name="industry[194]" title="水利水电工程" value="水利类-水利水电工程">
+                                <input type="checkbox" name="industry[195]" title="水文与水资源工程" value="水利类-水文与水资源工程">
+                                <input type="checkbox" name="industry[196]" title="港口航道与海岸工程" value="水利类-港口航道与海岸工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">航空航天类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[197]" title="航空航天类" value="航空航天类-航空航天类">
+                                <input type="checkbox" name="industry[198]" title="飞行器设计与工程" value="航空航天类-飞行器设计与工程">
+                                <input type="checkbox" name="industry[199]" title="飞行器动力工程" value="航空航天类-飞行器动力工程">
+                                <input type="checkbox" name="industry[200]" title="飞行器制造工程" value="航空航天类-飞行器制造工程">
+                                <input type="checkbox" name="industry[201]" title="飞行器环境与生命保障工程" value="航空航天类-飞行器环境与生命保障工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">制药工程类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[202]" title="制药工程类" value="制药工程类-制药工程类">
+                                <input type="checkbox" name="industry[203]" title="制药工程" value="制药工程类-制药工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">交通运输类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[204]" title="交通运输类" value="交通运输类-交通运输类">
+                                <input type="checkbox" name="industry[205]" title="交通运输" value="交通运输类-交通运输">
+                                <input type="checkbox" name="industry[206]" title="交通工程" value="交通运输类-交通工程">
+                                <input type="checkbox" name="industry[207]" title="油气储运工程" value="交通运输类-油气储运工程">
+                                <input type="checkbox" name="industry[208]" title="飞行技术" value="交通运输类-飞行技术">
+                                <input type="checkbox" name="industry[209]" title="航海技术" value="交通运输类-航海技术">
+                                <input type="checkbox" name="industry[210]" title="轮机工程" value="交通运输类-轮机工程">
+                                <input type="checkbox" name="industry[211]" title="物流工程" value="交通运输类-物流工程">
+                                <input type="checkbox" name="industry[212]" title="海事管理" value="交通运输类-海事管理">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-col-xs6 layui-col-sm6 layui-col-md6">
+                <div class="layui-collapse" lay-accordion>
+                     <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">船舶与海洋工程类</h5>
+                        <div class="layui-colla-content" style="min-height: 80px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[213]" title="船舶与海洋工程类" value="船舶与海洋工程类-船舶与海洋工程类">
+                                <input type="checkbox" name="industry[214]" title="船舶与海洋工程" value="船舶与海洋工程类-船舶与海洋工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">生物医学工程类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[215]" title="生物医学工程类" value="生物医学工程类-生物医学工程类">
+                                <input type="checkbox" name="industry[216]" title="生物医学工程" value="生物医学工程类-生物医学工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">轻工纺织食品类</h5>
+                        <div class="layui-colla-content" style="min-height: 70px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[217]" title="轻工纺织食品类" value="轻工纺织食品类-轻工纺织食品类">
+                                <input type="checkbox" name="industry[218]" title="食品科学与工程" value="轻工纺织食品类-食品科学与工程">
+                                <input type="checkbox" name="industry[219]" title="轻化工程" value="轻工纺织食品类-轻化工程">
+                                <input type="checkbox" name="industry[220]" title="包装工程" value="轻工纺织食品类-包装工程">
+                                <input type="checkbox" name="industry[221]" title="印刷工程" value="轻工纺织食品类-印刷工程">
+                                <input type="checkbox" name="industry[222]" title="纺织工程" value="轻工纺织食品类-纺织工程">
+                                <input type="checkbox" name="industry[223]" title="服装设计与工程" value="轻工纺织食品类-服装设计与工程">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">武器类</h5>
+                        <div class="layui-colla-content" style="min-height: 50px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[224]" title="武器类" value="武器类-武器类">
+                                <input type="checkbox" name="industry[225]" title="武器系统与发射工程" value="武器类-武器系统与发射工程">
+                                <input type="checkbox" name="industry[226]" title="探测制导与控制技术" value="武器类-探测制导与控制技术">
+                                <input type="checkbox" name="industry[227]" title="弹药工程与爆炸技术" value="武器类-弹药工程与爆炸技术">
+                                <input type="checkbox" name="industry[228]" title="特种能源工程与烟火技术" value="武器类-特种能源工程与烟火技术">
+                                <input type="checkbox" name="industry[229]" title="地面武器机动工程" value="武器类-地面武器机动工程">
+                                <input type="checkbox" name="industry[230]" title="信息对抗技术" value="武器类-信息对抗技术">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">公安技术类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[231]" title="公安技术类" value="公安技术类-公安技术类">
+                                <input type="checkbox" name="industry[232]" title="公安技术" value="公安技术类-公安技术">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">法学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[233]" title="法学类" value="法学类-法学类">
+                                <input type="checkbox" name="industry[234]" title="法学" value="法学类-法学">
+                                <input type="checkbox" name="industry[235]" title="马克思主义理论" value="法学类-马克思主义理论">
+                                <input type="checkbox" name="industry[236]" title="社会学" value="法学类-社会学">
+                                <input type="checkbox" name="industry[237]" title="政治学与行政学" value="法学类-政治学与行政学">
+                                <input type="checkbox" name="industry[238]" title="国际政治" value="法学类-国际政治">
+                                <input type="checkbox" name="industry[239]" title="外交学" value="法学类-外交学">
+                                <input type="checkbox" name="industry[240]" title="思想政治教育" value="法学类-思想政治教育">
+                                <input type="checkbox" name="industry[241]" title="公安学" value="法学类-公安学">
+                                <input type="checkbox" name="industry[242]" title="经济法" value="法学类-经济法">
+                                <input type="checkbox" name="industry[243]" title="国际经济法" value="法学类-国际经济法">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">历史学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[244]" title="历史学类" value="历史学类-历史学类">
+                                <input type="checkbox" name="industry[245]" title="历史学" value="历史学类-历史学">
+                                <input type="checkbox" name="industry[246]" title="考古学" value="历史学类-考古学">
+                                <input type="checkbox" name="industry[247]" title="博物馆学" value="历史学类-博物馆学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">数学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[248]" title="数学类" value="数学类-数学类">
+                                <input type="checkbox" name="industry[249]" title="数学与应用数学" value="数学类-数学与应用数学">
+                                <input type="checkbox" name="industry[250]" title="信息与计算科学" value="数学类-信息与计算科学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">天文地质地理类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[251]" title="天文地质地理类" value="天文地质地理类-天文地质地理类">
+                                <input type="checkbox" name="industry[252]" title="天文学" value="天文地质地理类-天文学">
+                                <input type="checkbox" name="industry[253]" title="地质学" value="天文地质地理类-地质学">
+                                <input type="checkbox" name="industry[254]" title="地理科学" value="天文地质地理类-地理科学">
+                                <input type="checkbox" name="industry[255]" title="地球物理学" value="天文地质地理类-地球物理学">
+                                <input type="checkbox" name="industry[256]" title="大气科学" value="天文地质地理类-大气科学">
+                                <input type="checkbox" name="industry[257]" title="海洋科学" value="天文地质地理类-海洋科学">
+                                <input type="checkbox" name="industry[258]" title="地矿" value="天文地质地理类-地矿">
+                                <input type="checkbox" name="industry[259]" title="宝石鉴定与加工" value="天文地质地理类-宝石鉴定与加工">
+                                <input type="checkbox" name="industry[260]" title="地球化学" value="天文地质地理类-地球化学">
+                                <input type="checkbox" name="industry[261]" title="石油工程" value="天文地质地理类-石油工程">
+                                <input type="checkbox" name="industry[262]" title="地球与空间科学" value="天文地质地理类-地球与空间科学">
+                                <input type="checkbox" name="industry[263]" title="地理信息系统" value="天文地质地理类-地理信息系统">
+                                <input type="checkbox" name="industry[264]" title="地理信息科学与技术" value="天文地质地理类-地理信息科学与技术">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">物理学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[265]" title="物理学类" value="物理学类-物理学类">
+                                <input type="checkbox" name="industry[266]" title="物理学" value="物理学类-物理学">
+                                <input type="checkbox" name="industry[267]" title="应用物理学" value="物理学类-应用物理学">
+                                <input type="checkbox" name="industry[268]" title="声学" value="物理学类-声学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">化学类及化学工程类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[269]" title="化学类及化学工程类" value="化学类及化学工程类-化学类及化学工程类">
+                                <input type="checkbox" name="industry[270]" title="化学" value="化学类及化学工程类-化学">
+                                <input type="checkbox" name="industry[271]" title="应用化学" value="化学类及化学工程类-应用化学">
+                                <input type="checkbox" name="industry[272]" title="化学工程与工艺" value="化学类及化学工程类-化学工程与工艺">
+                                <input type="checkbox" name="industry[273]" title="精细化工" value="化学类及化学工程类-精细化工">
+                                <input type="checkbox" name="industry[274]" title="化工设备与机械" value="化学类及化学工程类-化工设备与机械">
+                                <input type="checkbox" name="industry[275]" title="生物化工" value="化学类及化学工程类-生物化工">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">生物科学及生物技术类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[276]" title="生物科学及生物技术类" value="生物科学及生物技术类-生物科学及生物技术类">
+                                <input type="checkbox" name="industry[277]" title="生物工程" value="生物科学及生物技术类-生物工程">
+                                <input type="checkbox" name="industry[278]" title="生物科学，技术" value="生物科学及生物技术类-生物科学，技术">
+                                <input type="checkbox" name="industry[279]" title="生物信息学" value="生物科学及生物技术类-生物信息学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">环境科学与安全类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[280]" title="环境科学与安全类" value="环境科学与安全类-环境科学与安全类">
+                                <input type="checkbox" name="industry[281]" title="环境科学" value="环境科学与安全类-环境科学">
+                                <input type="checkbox" name="industry[282]" title="环境工程" value="环境科学与安全类-环境工程">
+                                <input type="checkbox" name="industry[283]" title="安全工程" value="环境科学与安全类-安全工程">
+                                <input type="checkbox" name="industry[284]" title="生态学" value="环境科学与安全类-生态学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">力学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[285]" title="力学类" value="力学类-力学类">
+                                <input type="checkbox" name="industry[286]" title="力学" value="力学类-力学">
+                                <input type="checkbox" name="industry[287]" title="应用力学" value="力学类-应用力学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">电子信息科学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[288]" title="电子信息科学类" value="电子信息科学类-电子信息科学类">
+                                <input type="checkbox" name="industry[289]" title="电子信息科学与技术" value="电子信息科学类-电子信息科学与技术">
+                                <input type="checkbox" name="industry[290]" title="微电子学" value="电子信息科学类-微电子学">
+                                <input type="checkbox" name="industry[291]" title="光信息科学与技术" value="电子信息科学类-光信息科学与技术">
+                                <input type="checkbox" name="industry[292]" title="光电子技术科学" value="电子信息科学类-光电子技术科学">
+                                <input type="checkbox" name="industry[293]" title="信息科学技术" value="电子信息科学类-信息科学技术">
+                                <input type="checkbox" name="industry[294]" title="信息安全" value="电子信息科学类-信息安全">
+                                <input type="checkbox" name="industry[295]" title="科技防卫" value="电子信息科学类-科技防卫">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">系统科学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[296]" title="系统科学类" value="系统科学类-系统科学类">
+                                <input type="checkbox" name="industry[297]" title="系统理论" value="系统理论-电子信息科学与技术">
+                                <input type="checkbox" name="industry[298]" title="系统科学与工程" value="系统科学与工程-微电子学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">教育学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[299]" title="教育学类" value="教育学类-教育学类">
+                                <input type="checkbox" name="industry[300]" title="教育学" value="教育学类-教育学">
+                                <input type="checkbox" name="industry[301]" title="体育教育" value="教育学类-体育教育">
+                                <input type="checkbox" name="industry[302]" title="学前教育" value="教育学类-学前教育">
+                                <input type="checkbox" name="industry[303]" title="职业技术教育" value="教育学类-职业技术教育">
+                                <input type="checkbox" name="industry[304]" title="特殊教育" value="教育学类-特殊教育">
+                                <input type="checkbox" name="industry[305]" title="教育技术学" value="教育学类-教育技术学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">医学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[306]" title="医学类" value="医学类-医学类">
+                                <input type="checkbox" name="industry[307]" title="基础医学" value="医学类-基础医学">
+                                <input type="checkbox" name="industry[308]" title="预防医学" value="医学类-预防医学">
+                                <input type="checkbox" name="industry[309]" title="临床医学与医学技术" value="医学类-临床医学与医学技术">
+                                <input type="checkbox" name="industry[310]" title="口腔医学" value="医学类-口腔医学">
+                                <input type="checkbox" name="industry[311]" title="中医学" value="医学类-中医学">
+                                <input type="checkbox" name="industry[312]" title="护理学" value="医学类-护理学">
+                                <input type="checkbox" name="industry[313]" title="药学" value="医学类-药学">
+                                <input type="checkbox" name="industry[314]" title="医学检验" value="医学类-医学检验">
+                                <input type="checkbox" name="industry[315]" title="营养学" value="医学类-营养学">
+                                <input type="checkbox" name="industry[316]" title="麻醉学" value="医学类-麻醉学">
+                                <input type="checkbox" name="industry[317]" title="放射医学" value="医学类-放射医学">
+                                <input type="checkbox" name="industry[318]" title="眼视光学" value="医学类-眼视光学">
+                                <input type="checkbox" name="industry[319]" title="针灸推拿学" value="医学类-针灸推拿学">
+                                <input type="checkbox" name="industry[320]" title="中药学" value="医学类-中药学">
+                                <input type="checkbox" name="industry[321]" title="法医学" value="医学类-法医学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">心理学类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[322]" title="心理学类" value="心理学类-心理学类">
+                                <input type="checkbox" name="industry[323]" title="心理学" value="心理学类-心理学">
+                                <input type="checkbox" name="industry[324]" title="应用心理学" value="心理学类-应用心理学">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-colla-item">
+                        <h5 class="layui-colla-title">农业类</h5>
+                        <div class="layui-colla-content" style="min-height: 100px;">
+                            <div class="layui-form-item">
+                                <input type="checkbox" name="industry[325]" title="农业类" value="农业类-教育学类">
+                                <input type="checkbox" name="industry[326]" title="农学" value="农业类-农学">
+                                <input type="checkbox" name="industry[327]" title="园艺" value="农业类-园艺">
+                                <input type="checkbox" name="industry[328]" title="植物保护学" value="农业类-植物保护学">
+                                <input type="checkbox" name="industry[329]" title="茶学" value="农业类-茶学">
+                                <input type="checkbox" name="industry[330]" title="草业科学" value="农业类-草业科学">
+                                <input type="checkbox" name="industry[331]" title="森林资源" value="农业类-森林资源">
+                                <input type="checkbox" name="industry[332]" title="环境生态" value="农业类-环境生态">
+                                <input type="checkbox" name="industry[333]" title="动物科学" value="农业类-动物科学">
+                                <input type="checkbox" name="industry[334]" title="动物医学" value="农业类-动物医学">
+                                <input type="checkbox" name="industry[335]" title="水产科学" value="农业类-水产科学">
+                                <input type="checkbox" name="industry[336]" title="农业工程" value="农业类-农业工程">
+                                <input type="checkbox" name="industry[337]" title="林业工程" value="农业类-林业工程">
+                                <input type="checkbox" name="industry[338]" title="植物生产" value="农业类-植物生产">
+                                <input type="checkbox" name="industry[339]" title="园林" value="农业类-园林">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: right;padding-top: 20px;margin-bottom: 0px;">
+                <div class="layui-btn-group">
+                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit="" lay-filter="btn">确定</button>
+                    <button  class="layui-btn layui-btn-normal layui-btn-sm" type="button" onclick="_close()">取消</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery/jquery-3.2.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/layui/layui.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/salesmind/common.js' %}"></script>
+<script type="text/javascript">
+    var id = getQueryString("id");
+    layui.use(['element','form'], function() {
+        var element = layui.element,form=layui.form;
+        form.on('submit(btn)', function(data){
+            var params = data.field;
+            if(Object.keys(params).length > 3){
+                layer.msg('最多添加3个',{icon: 2,offset: '100px'});
+                return false;
+            }
+            var value="";
+            for(var k in params){
+                value += params[k] +",";
+            }
+            parent.$("#"+id).val(value);
+            var index = parent.layer.getFrameIndex(window.name);
+            parent.layer.close(index);
+            return false;
+        });
+        });
+    function _close() {
+        var index = parent.layer.getFrameIndex(window.name);
+        parent.layer.close(index);
+    }
+    </script>
+</body>
+</html>

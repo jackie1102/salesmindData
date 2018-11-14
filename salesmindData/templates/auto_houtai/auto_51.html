@@ -1,0 +1,417 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block topfiles %}
+    <script type="text/javascript" src="{% static 'js/jquery/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/salesmind/auto_job.js' %}"></script>
+{% endblock topfiles %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+
+        .error_tip {
+            display: none;
+            color: red;
+        }
+
+        #form th {
+            font-weight: normal;
+            text-align: center;
+            border-bottom: #e6e6e6 1px solid;
+        }
+
+        #form .title th {
+            font-weight: bold;
+            border-bottom: #8D8D8D 1px solid;
+        }
+
+        .key {
+            border-right: #e6e6e6 1px solid;
+        }
+
+        .br {
+            border-bottom: none !important;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">前程无忧</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+                <ul class="layui-tab-title">
+                    <li class="layui-this">关键词搜索</li>
+                    <li>公司名搜索</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div class="layui-tab-item layui-show">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="a24">
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">关键词</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="keywords" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">职能</label>
+                                    <div class="layui-input-block">
+                                        <input id="position1" type="text" name="position" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">行业</label>
+                                    <div class="layui-input-block">
+                                        <input id="industry1" type="text" name="industry" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">地区</label>
+                                    <div class="layui-input-block">
+                                        <input id="addr1" type="text" name="addr" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">在职状态</label>
+                                    <div class="layui-input-block">
+                                        <input id="status1" type="text" name="status" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">更新时间</label>
+                                    <div class="layui-input-block">
+                                        <input id="update1" type="text" name="update" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" autocomplete="off"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3" style="margin-top: 55px">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">搜最近职能</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="only_fun" lay-skin="primary">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">搜最近行业</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="onlyIndustry" lay-skin="primary">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3" style="margin-top: 55px">
+                                {#                                <h2>对应关系</h2>#}
+                                <table id="form" style="width: 80%;margin: auto;">
+                                    <tr class="title">
+                                        <th width="10%">在职状态</th>
+                                        <th width="10%">填写内容</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">不限</th>
+                                        <th width="10%">（空）</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">目前正在找工作</th>
+                                        <th width="10%">目前正在找工作</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">其他</th>
+                                        <th width="10%">其他</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="br" width="10%">&nbsp;</th>
+                                        <th class="br" width="10%">&nbsp;</th>
+                                    </tr>
+                                    <tr class="title">
+                                        <th width="10%">更新时间</th>
+                                        <th width="10%">填写内容</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">不限</th>
+                                        <th width="10%">（空）</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近1周</th>
+                                        <th width="10%">近1周</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近2周</th>
+                                        <th width="10%">近2周</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近1个月</th>
+                                        <th width="10%">近1个月</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近2个月</th>
+                                        <th width="10%">近2个月</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近6个月</th>
+                                        <th width="10%">近6个月</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近1年</th>
+                                        <th width="10%">近1年</th>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn1">提交</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="layui-tab-item">
+                        <form class="layui-form" action="">
+                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                            <input type="hidden" name="spider_id" value="a33">
+                            <div class="layui-col-md4">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">关键词</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="keywords" autocomplete="off" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">职能</label>
+                                    <div class="layui-input-block">
+                                        <input id="position2" type="text" name="position" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">行业</label>
+                                    <div class="layui-input-block">
+                                        <input id="industry2" type="text" name="industry" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">地区</label>
+                                    <div class="layui-input-block">
+                                        <input id="addr2" type="text" name="addr" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">在职状态</label>
+                                    <div class="layui-input-block">
+                                        <input id="status2" type="text" name="status" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">更新时间</label>
+                                    <div class="layui-input-block">
+                                        <input id="update2" type="text" name="update" autocomplete="off"
+                                               class="layui-input">
+                                        <span class="error_tip">提示信息</span>
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">下载文件名</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="table_name" class="layui-input">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="layui-col-md3" style="margin-top: 55px;">
+{#                                <div class="layui-form-item">#}
+{#                                    <label class="layui-form-label">最近公司</label>#}
+{#                                    <div class="layui-input-block">#}
+{#                                        <input type="checkbox" name="last" lay-skin="switch">#}
+{#                                    </div>#}
+{#                                </div>#}
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">搜最近职能</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="only_fun" lay-skin="primary">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">搜最近行业</label>
+                                    <div class="layui-input-block">
+                                        <input type="checkbox" name="onlyIndustry" lay-skin="primary">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="layui-col-md3" style="margin-top: 55px">
+                                {#                                <h2>对应关系</h2>#}
+                                <table id="form" style="width: 80%;margin: auto;">
+                                    <tr class="title">
+                                        <th width="10%">在职状态</th>
+                                        <th width="10%">填写内容</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">不限</th>
+                                        <th width="10%">（空）</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">目前正在找工作</th>
+                                        <th width="10%">目前正在找工作</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">其他</th>
+                                        <th width="10%">其他</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="br" width="10%">&nbsp;</th>
+                                        <th class="br" width="10%">&nbsp;</th>
+                                    </tr>
+                                    <tr class="title">
+                                        <th width="10%">更新时间</th>
+                                        <th width="10%">填写内容</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">不限</th>
+                                        <th width="10%">（空）</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近1周</th>
+                                        <th width="10%">近1周</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近2周</th>
+                                        <th width="10%">近2周</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近1个月</th>
+                                        <th width="10%">近1个月</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近2个月</th>
+                                        <th width="10%">近2个月</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近6个月</th>
+                                        <th width="10%">近6个月</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="key" width="10%">近1年</th>
+                                        <th width="10%">近1年</th>
+                                    </tr>
+                                </table>
+
+                            </div>
+                            <div class="layui-form-item">
+                                <div class="layui-input-block">
+                                    <button class="layui-btn" lay-submit lay-filter="btn2">保存</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block" style="margin-left: 200px;margin-top: -100px">
+                                <button class="layui-btn" id="upload">开始爬虫</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h2 class="site-h1">操作说明</h2>
+        <ul class="layui-timeline">
+            <li>
+                <div style="margin-left: 20px">
+                    <h5>1.点击生成任务</h5>
+                </div>
+            </li>
+        </ul>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        layui.use(['element', 'form', 'upload'], function () {
+            var form = layui.form, upload = layui.upload;
+            var param2 = '';
+            form.on('submit(btn1)', function (data) {
+                var param = data.field;
+                if (param.table_name != '') {
+                    var res = post('/spider/create_task_job_condition/', param);
+                    if (res.errId == "0") {
+                        layer.msg("创建成功", {icon: 1, offset: '100px'});
+                    } else {
+                        layer.msg(res.errMsg, {icon: 2, offset: '100px'});
+                    }
+                } else {
+                    layer.msg('下载文件名不可为空', {icon: 2, offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+            form.on('submit(btn2)', function (data) {
+                param2 = data.field;
+                if (param2.table_name == '') {
+                    layer.msg('下载文件名不可为空', {icon: 2, offset: '100px'});
+                } else {
+                    layer.msg("保存成功", {icon: 1, offset: '100px'});
+                }
+                return false
+            });
+            upload.render({
+                elem: '#upload',
+                url: '/spider/create_task_job_company/',
+                accept: 'file',
+                exts: 'xls|xlsx',
+                before: function () {
+                    this.data = param2
+                }
+                , done: function (res) {
+                    if (res.errId == '0') {
+                        layer.msg("上传成功", {icon: 1, offset: '100px'});
+                    } else {
+                        layer.msg(res.errMsg, {icon: 2, offset: '100px'});
+                    }
+                }
+                , error: function () {
+                }
+            });
+        })
+    </script>
+{% endblock bottomfiles %}

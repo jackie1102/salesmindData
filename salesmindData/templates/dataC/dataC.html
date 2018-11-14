@@ -1,0 +1,246 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            font-family: NSimSun;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+            letter-spacing: 5px;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+
+        .item-list li a {
+            font-family: 新宋体;
+            font-size: 20px;
+            font-weight: bold;
+
+        }
+
+        .item-list li {
+            display: inline-block;
+            width: 18%;
+            margin-bottom: 30px;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <div style="margin-bottom: 30px;text-align: center">
+        <h1 class="site-h1">清洗工具</h1>
+    </div>
+    <div class="item-content">
+        <ul class="item-list" style="height: 300px;padding-left: 100px">
+            <li><a href="/cleaning/filter_company/">筛选公司</a></li>
+            <li><a href="/cleaning/filter_phone_number/">筛选手机</a></li>
+            <li><a href="/cleaning/filter_abbreviation/">公司简称</a></li>
+            <li><a href="/cleaning/extract_city/">提取城市</a></li>
+            <li><a href="/cleaning/query_phone/">手机归属</a></li>
+            <li><a href="/cleaning/scale_clean/">人员规模清洗</a></li>
+            <li><a href="/cleaning/info_clean/">公司介绍提取</a></li>
+            <li><a href="/cleaning/match_company/">公司匹配</a></li>
+            <li><a href="/cleaning/info_contain/">提取关键词</a></li>
+        </ul>
+        {#          <div class="layui-tab-content">#}
+        {#            <div class="layui-tab-item layui-show">#}
+        {#                <div style="margin: 20px 0px;">#}
+        {#                    <div class="layui-row">#}
+        {#                        <form class="layui-form" action="">#}
+        {#                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">#}
+        {#                            <div id="formm" class="layui-col-md8">#}
+        {#                                <div class="layui-col-md9">#}
+        {#                                    <div class="layui-form-item">#}
+        {#                                        <label class="layui-form-label">关键词</label>#}
+        {#                                        <div class="layui-input-block">#}
+        {#                                            <input type="text" name="keywords" autocomplete="off" class="layui-input" placeholder="请输入简历关键词，多关键词可用空格分隔">#}
+        {#                                        </div>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="layui-col-md3">#}
+        {#                                    <div class="layui-form-item">#}
+        {#                                        <label class="layui-form-label">包含关键词</label>#}
+        {#                                        <div class="layui-input-block">#}
+        {#                                            <input type="checkbox" name="contain_keyword" lay-skin="switch">#}
+        {#                                        </div>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="layui-form-item">#}
+        {#                                    <label class="layui-form-label">下载文件名</label>#}
+        {#                                    <div class="layui-input-block">#}
+        {#                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                            <div class="layui-form-item">#}
+        {#                                <div class="layui-input-block" style="text-align: right">#}
+        {#                                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="btn">保存条件</button>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                        </form>#}
+        {#                        <div class="layui-form-item">#}
+        {#                            <div class="layui-input-block" style="text-align: right">#}
+        {#                                <button class="layui-btn layui-btn-normal layui-btn-sm" id="test">开始筛选</button>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#            <div class="layui-tab-item">#}
+        {#                <div style="margin: 20px 0px;">#}
+        {#                    <div class="layui-row">#}
+        {#                        <form class="layui-form" action="">#}
+        {#                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">#}
+        {#                            <div id="formm" class="layui-col-md8">#}
+        {#                                <div class="layui-form-item">#}
+        {#                                    <label class="layui-form-label">下载文件名</label>#}
+        {#                                    <div class="layui-input-block">#}
+        {#                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                                <div class="layui-col-md3">#}
+        {#                                    <div class="layui-form-item">#}
+        {#                                        <label class="layui-form-label">非手机号</label>#}
+        {#                                        <div class="layui-input-block">#}
+        {#                                            <input type="checkbox" name="no_phone" lay-skin="switch">#}
+        {#                                        </div>#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                            <div class="layui-form-item">#}
+        {#                                <div class="layui-input-block" style="text-align: right">#}
+        {#                                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="btn2">保存条件</button>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                        </form>#}
+        {#                        <div class="layui-form-item">#}
+        {#                            <div class="layui-input-block" style="text-align: right">#}
+        {#                                <button class="layui-btn layui-btn-normal layui-btn-sm" id="test2">开始筛选</button>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#            <div class="layui-tab-item">#}
+        {#                <div style="margin: 20px 0px;">#}
+        {#                    <div class="layui-row">#}
+        {#                        <form class="layui-form" action="">#}
+        {#                            <input type="hidden" name="user_id" value="{{ request.session.userid }}">#}
+        {#                            <div id="formm" class="layui-col-md8">#}
+        {#                                <div class="layui-form-item">#}
+        {#                                    <label class="layui-form-label">下载文件名</label>#}
+        {#                                    <div class="layui-input-block">#}
+        {#                                        <input type="text" name="table_name" autocomplete="off" class="layui-input">#}
+        {#                                    </div>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                            <div class="layui-form-item">#}
+        {#                                <div class="layui-input-block" style="text-align: right">#}
+        {#                                    <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="btn3">保存条件</button>#}
+        {#                                </div>#}
+        {#                            </div>#}
+        {#                        </form>#}
+        {#                        <div class="layui-form-item">#}
+        {#                            <div class="layui-input-block" style="text-align: right">#}
+        {#                                <button class="layui-btn layui-btn-normal layui-btn-sm" id="test3">开始提取</button>#}
+        {#                            </div>#}
+        {#                        </div>#}
+        {#                    </div>#}
+        {#                </div>#}
+        {#            </div>#}
+        {#          </div>#}
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    {#    var param,param2,param3;#}
+    <script type="text/javascript">
+        layui.use(['element', 'table', 'upload', 'form'], function () {
+            var element = layui.element, table = layui.table, upload = layui.upload, form = layui.form;
+            {#form.on('submit(btn)', function(data){#}
+            {#        param = data.field;#}
+            {#        layer.msg("已保存",{icon: 1,offset: '100px'});#}
+            {#        return false;#}
+            {#    });#}
+            {#var uploadInst = upload.render({#}
+            {#        elem: '#test' //绑定元素#}
+            {#        ,url: '/cleaning/clean_filter_company/'//上传接口#}
+            {#        ,accept:"file"#}
+            {#        ,exts:'xls|xlsx'#}
+            {#        ,before:function () {#}
+            {#            this.data = param#}
+            {#        }#}
+            {#        ,done: function(res){#}
+            {#            if(res.errId == '0'){#}
+            {#                layer.msg("上传成功",{icon: 1,offset: '100px'});#}
+            {#            }else{#}
+            {#                layer.msg(data.errMsg,{icon: 2,offset: '100px'});#}
+            {#            }#}
+            {#        }#}
+            {#        ,error: function(){}#}
+            {#    });#}
+            {#form.on('submit(btn2)', function(data){#}
+            {#        param2 = data.field;#}
+            {#        layer.msg("已保存",{icon: 1,offset: '100px'});#}
+            {#        return false;#}
+            {#    });#}
+            {#var uploadInst2 = upload.render({#}
+            {#        elem: '#test2' //绑定元素#}
+            {#        ,url: '/cleaning/clean_filter_phone_number/'//上传接口#}
+            {#        ,accept:"file"#}
+            {#        ,exts:'xls|xlsx'#}
+            {#        ,before:function () {#}
+            {#            this.data = param2#}
+            {#        }#}
+            {#        ,done: function(res){#}
+            {#            if(res.errId == '0'){#}
+            {#                layer.msg("上传成功",{icon: 1,offset: '100px'});#}
+            {#            }else{#}
+            {#                layer.msg(data.errMsg,{icon: 2,offset: '100px'});#}
+            {#            }#}
+            {#        }#}
+            {#        ,error: function(){}#}
+            {#    });#}
+            {#form.on('submit(btn3)', function(data){#}
+            {#        param3 = data.field;#}
+            {#        layer.msg("已保存",{icon: 1,offset: '100px'});#}
+            {#        return false;#}
+            {#    });#}
+            {#var uploadInst3 = upload.render({#}
+            {#        elem: '#test3' //绑定元素#}
+            {#        ,url: '/cleaning/clean_filter_abbreviation/'//上传接口#}
+            {#        ,accept:"file"#}
+            {#        ,exts:'xls|xlsx'#}
+            {#        ,before:function () {#}
+            {#            this.data = param2#}
+            {#        }#}
+            {#        ,done: function(res){#}
+            {#            if(res.errId == '0'){#}
+            {#                layer.msg("上传成功",{icon: 1,offset: '100px'});#}
+            {#            }else{#}
+            {#                layer.msg(data.errMsg,{icon: 2,offset: '100px'});#}
+            {#            }#}
+            {#        }#}
+            {#        ,error: function(){}#}
+            {#    });#}
+        });
+    </script>
+{% endblock bottomfiles %}

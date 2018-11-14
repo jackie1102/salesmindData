@@ -1,0 +1,602 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+
+        .laytable-cell-1-spider_id {
+            padding: 0;
+        }
+
+        #task_list .data {
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        {#background-color: white;#} outline: none;
+            border: #ebebe4 1px solid;
+
+        }
+
+        #title {
+            height: 100%;
+            box-sizing: border-box;
+            text-align: center;
+        {#border: #e0e0e0 1px solid;#} background-color: #0C0C0C;
+            color: #f2f2f2;
+        }
+
+        #task_list th, td {
+            box-sizing: border-box;
+            height: 100%;
+            padding: 5px 0;
+            border: #ebebe4 1px solid;
+        }
+
+        .layui-btn-normal {
+            background: #ffffff;
+            color: #1E9FFF;
+            border: 1px solid #1E9FFF;
+        }
+
+        .layui-btn-normal:hover {
+            color: #ffffff;
+            background: #1E9FFF;
+        }
+
+        .active {
+            color: #ffffff;
+            background: #1E9FFF;
+        }
+
+        .layui-btn-danger {
+            background: #ffffff;
+            color: #FF5722;
+            border: 1px solid #FF5722;
+        }
+
+        .layui-btn-danger:hover {
+            color: #ffffff;
+            background: #FF5722;
+        }
+
+        .opera1 .layui-btn {
+            width: 25%;
+        }
+
+        .opera2 .layui-btn {
+            width: 25%;
+        }
+
+        .layui-timeline-axis {
+            z-index: 0
+        }
+
+        #task_table .task:hover {
+            background-color: #eaeaea;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <div style="margin-bottom: 30px;">
+        <h1 class="site-h1">任务管理</h1>
+        <div>
+            <form class="layui-form">
+                {% if request.session.userid != 1 %}
+                    <div class="layui-col-md4" style="display: none">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">创建用户</label>
+                            <div class="layui-input-block">
+                                <input id="user" type="text" name="user" class="layui-input"
+                                       value="{{ request.session.nikename }}">
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="layui-col-md4">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">创建用户</label>
+                            <div class="layui-input-block">
+                                <input id="user" type="text" name="user" autocomplete="off" class="layui-input"
+                                       value="不限">
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="layui-col-md4">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">创建时间</label>
+                        <div class="layui-input-block">
+                            <select id="create_time" name="create_time">
+                                <option value="7">近1周</option>
+                                <option value="30">近1个月</option>
+                                <option value="不限">不限</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="layui-col-md4">
+                <div class="layui-form-item" style="margin-left: 20px">
+                    <button class="layui-btn" id="Search">搜索</button>
+                </div>
+            </div>
+        </div>
+        <div id="task_list" style="width:100%;overflow:auto">
+            <table id="task_table" style="width: 100%;margin: auto;">
+            </table>
+        </div>
+        <div class="pagenation" style="margin-top: 10px;float: right">
+            <button class="layui-btn layui-btn-normal layui-btn-xs" style="margin-right: 4px" onclick="page_up()">上一页
+            </button>
+            <span id="current_page" style="margin-left: 1px">1</span>
+            <span style="margin-left: 1px">/</span>
+            <span id="totle_page" style="margin-right: 5px">1</span>
+            <button class="layui-btn layui-btn-normal layui-btn-xs" style="margin-right: 4px" onclick="page_down()">
+                下一页
+            </button>
+        </div>
+    </div>
+    {#    <h1 class="site-h1">更新日志</h1>#}
+    {#    <ul class="layui-timeline">#}
+    {#        <li class="layui-timeline-item">#}
+    {#        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>#}
+    {#        <div class="layui-timeline-content layui-text">#}
+    {#            <h2 class="layui-timeline-title">1.1.0&nbsp;&nbsp;#}
+    {#                <span class="layui-badge-rim">2018-6-1</span>#}
+    {#            </h2>#}
+    {#            <p>首个大版本更新</p>#}
+    {#        </div>#}
+    {#      </li>#}
+    {#        <li class="layui-timeline-item">#}
+    {#        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>#}
+    {#        <div class="layui-timeline-content layui-text">#}
+    {#            <h2 class="layui-timeline-title">1.0.0&nbsp;&nbsp;#}
+    {#                <span class="layui-badge-rim">2018-3-1</span>#}
+    {#            </h2>#}
+    {#          <p>首个版本正式出蛋</p>#}
+    {#        </div>#}
+    {#      </li>#}
+    {#        <li class="layui-timeline-item">#}
+    {#        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>#}
+    {#        <div class="layui-timeline-content layui-text">#}
+    {#            <div class="layui-timeline-title">孵化</div>#}
+    {#        </div>#}
+    {#      </li>#}
+    {#    </ul>#}
+    <h1 class="site-h1">操作说明</h1>
+    <ul class="layui-timeline">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h5 class="layui-timeline-title">根据爬虫类型点击【采集url/上传文件】中的【开始】或者【上传】，【采集详情】将在【采集url】或者【上传文件】完成后自动开始。</h5>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h5 class="layui-timeline-title">不可在【采集url】状态显示【未启动】或者【运行中】状态下点击【采集详情】的任意操作。</h5>
+            </div>
+        </li>
+    </ul>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        $(function () {
+            layui.use(['element', 'form', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var name = '{{ request.session.nikename }}'
+                if (name == 'Devon') {
+                    load_html({'user': '不限', 'create_time': '7'});
+                } else {
+                    load_html({'user': '{{ request.session.nikename }}', 'create_time': '7'});
+                }
+            });
+        });
+
+        $('#Search').click(function () {
+            var user = $('#user').val();
+            var create_time = $('#create_time').val();
+            layui.use(['element', 'form', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                load_html({'user': user, 'create_time': create_time});
+            });
+        });
+
+        function load_html(param) {
+            var index = layer.load();
+            $.post('/sysuser/api/tasks.json', param, function (res) {
+                var tasks = res.tasks;
+                var current_page = res.current_page;
+                var totle_page = res.totle_page;
+                load_tasks(tasks);
+                select_load();
+                document.getElementById('current_page').innerText = current_page;
+                document.getElementById('totle_page').innerText = totle_page;
+                tasks.forEach(function (item) {
+                    var spiderid = item.spider_id;
+                    if (spiderid.indexOf('a') != -1) {
+                        spiderid = spiderid.replace('a', '')
+                        if (spiderid % 2 == 1 || spiderid.indexOf('c') != -1) {
+                            upload(item.task_id, {
+                                'spider_id': item.spider_id,
+                                'task_id': item.task_id,
+                                'table_name': item.table_name
+                            })
+                        }
+                    } else {
+                        if (spiderid % 2 == 1 || spiderid.indexOf('c') != -1) {
+                            upload(item.task_id, {
+                                'spider_id': item.spider_id,
+                                'task_id': item.task_id,
+                                'table_name': item.table_name
+                            })
+                        }
+                    }
+                });
+                layer.close(index)
+            });
+        }
+
+        function select_load() {
+            [].slice.call($(".condition")).map(function (res) {
+                var spiderid = $(res).attr("spider_id");
+                if (spiderid.indexOf('a') != -1) {
+                    spiderid = spiderid.replace('a', '');
+                    if (spiderid % 2 == 0) {
+                        $(res).show();
+                    }
+                } else {
+                    if (spiderid % 2 == 0) {
+                        $(res).show();
+                    }
+                }
+            });
+            [].slice.call($(".company")).map(function (res) {
+                var spiderid = $(res).attr("spider_id");
+                if (spiderid.indexOf("c") != -1) {
+                    $(res).show();
+
+                }
+                if (spiderid.indexOf('a') != -1) {
+                    spiderid = spiderid.replace('a', '');
+                    if (spiderid % 2 == 1) {
+                        $(res).show();
+                    }
+                } else {
+                    if (spiderid % 2 == 1) {
+                        $(res).show();
+                    }
+                }
+            });
+            [].slice.call($(".status")).map(function (res) {
+                if ($(res).html() == "已中断") {
+                    $(res).css({'color': 'red'});
+                }
+            })
+
+        }
+
+        function load_tasks(tasks) {
+            $('#task_table').html('<tr id="title">\n' +
+                '<th style="width: 5%">id</th>\n' +
+                '<th style="width: 5%">用户</th>\n' +
+                '<th style="width: 10%">爬虫</th>\n' +
+                '<th style="width: 10%">开始时间</th>\n' +
+                '<th style="width: 8%">采集URL</th>\n' +
+                '<th style="width: 8%">数据采集</th>\n' +
+                '<th style="width: 16%">采集url/上传文件</th>\n' +
+                '<th style="width: 16%">详情采集</th>\n' +
+                '<th style="width: 8%">进度</th>\n' +
+                '<th style="width: 8%">删除</th>\n' +
+                '<th style="width: 8%">更多操作</th>\n' +
+                '</tr>');
+
+            tasks.forEach(function (item) {
+                var Item = JSON.stringify(item);
+                $('#task_table').html($('#task_table').html() + '<tr class="task" id="' + item.task_id + '">\
+                <td class="data" style="width: 5%">' + item.task_id + '</td>\
+                <td class="data" style="width: 5%">' + item.user + '</td>\
+                <td class="data" style="width: 10%">' + item.table_name + '</td>\
+                <td class="data" style="width: 10%">' + item.start_time + '</td>\
+                <td id="' + item.task_id + '_1" class="data status" style="width: 8%">' + item.state_1 + '</td>\
+                <td id="' + item.task_id + '_2" class="data status" style="width: 8%">' + item.state_2 + '</td>\
+                <td class="opera1 data company" spider_id="' + item.spider_id + '" style="width: 16%;display: none">\
+                    <span id="upload' + item.task_id + '" class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" type="button">上传</span>\
+                    <span class="layui-btn layui-btn-xs layui-btn-radius layui-btn-disabled" style="margin-left: 10px">停止</span>\
+                    <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs" onclick="clear_data(' + item.task_id + ')">清空</span>\
+                </td>\
+                <td class="opera1 data condition" spider_id="' + item.spider_id + '" style="width: 16%;display: none;">\
+                    <span  class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs" onclick="start1(' + Item.replace(/\"/g, "'") + ')" type="button">开始</span>\
+                    <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs" onclick="stop1(' + Item.replace(/\"/g, "'") + ')" type="button">停止</span>\
+                    <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs" onclick="clear_data(' + item.task_id + ')" type="button">清空</span>\
+                </td>\
+                <td class="opera2 data" style="width: 16%">\
+                    <span class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs" type="button" onclick="start2(' + Item.replace(/\"/g, "'") + ')">开始</span>\
+                    <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs" type="button" onclick="stop2(' + Item.replace(/\"/g, "'") + ')">停止</span>\
+                    <span id="download' + item.task_id + '" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs" type="button" onclick="downfile(' + Item.replace(/\"/g, "'") + ')">' + item.download_status + '</span>\
+                </td>\
+                <td class="data" style="width: 8%;">\
+                        <div id="' + item.task_id + '_progress">' + item.progress + '%</div>\
+                </td>\
+                <td class="data" style="width: 8%">\
+                    <span class="layui-btn layui-btn-danger layui-btn-radius layui-btn-xs" style="width: 50%" type="button" onclick="del_task(' + Item.replace(/\"/g, "'") + ')">删除</span>\
+                </td>\
+                <td class="data" style="width: 8%">\
+                    <span class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs" style="width: 50%" type="button" onclick="more(' + Item.replace(/\"/g, "'") + ')">more</span>\
+                </td>\
+                </tr>'
+                );
+            });
+        }
+
+        function clear_data(task_id) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element;
+                layer.open({
+                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                    content: "<p style='text-align: center'>确定要清空吗</p>",
+                    offset: '100px',
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    yes: function (index) {
+                        layer.close(index);
+                        var data = post('/spider/clear_data/', {'task_id': task_id});
+                        if (data.errId == 0) {
+                            layer.open({
+                                title: ['提示', 'padding-left:80px;text-align: center;'],
+                                content: "<p style='text-align: center'>清除成功</p>",
+                                offset: '100px',
+                                btn: ['确定'],
+                                btnAlign: 'c',
+                                yes: function (index) {
+                                    layer.close(index);
+                                    var state1 = document.getElementById(task_id + '_1');
+                                    var state2 = document.getElementById(task_id + '_2');
+                                    var download_status = document.getElementById('download' + task_id);
+                                    state1.innerText = '未启动';
+                                    state2.innerText = '未启动';
+                                    state1.style.color = 'black';
+                                    state2.style.color = 'black';
+                                    download_status.innerText = '下载';
+                                    element.progress(task_id + '_demo', '0%')
+                                }
+                            });
+                        } else {
+                            layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                        }
+                    },
+                    btn2: function (index) {
+                        layer.close(index)
+                    }
+                });
+
+            })
+        }
+
+        function start1(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var ele = document.getElementById(task.task_id + '_1');
+                var status = ele.innerText.replace(/\s+/g,"");
+                if (status == '运行中') {
+                    layer.msg("当前程序已在运行", {icon: 2, offset: '100px'});
+                } else {
+                    var data = post("/spider/start_task1/", {
+                        'spider_id': task.spider_id,
+                        'task_id': task.task_id,
+                        'table_name': task.table_name
+                    });
+                    if (data.errId == 0) {
+                        layer.open({
+                            title: ['提示', 'padding-left:80px;text-align: center;'],
+                            content: "<p style='text-align: center'>启动成功</p>",
+                            offset: '100px',
+                            btn: ['确定'],
+                            btnAlign: 'c',
+                            yes: function (index) {
+                                layer.close(index);
+                                var state1 = document.getElementById(task.task_id + '_1');
+                                state1.innerText = '运行中';
+                                state1.style.color = 'black';
+                            }
+                        });
+                    } else {
+                        layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                    }
+                }
+            })
+        }
+
+        function stop1(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                layer.open({
+                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                    content: "<p style='text-align: center'>停止后不可继续，确定要停止吗？</p>",
+                    offset: '100px',
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    yes: function (index) {
+                        layer.close(index)
+                        var ele = document.getElementById(task.task_id + '_1');
+                        var status = ele.innerText.replace(/\s+/g,"");
+                        if (status != '运行中') {
+                            layer.msg("当前状态停止无效", {icon: 2, offset: '100px'});
+                        } else {
+                            var data = post("/spider/stop_task1/", {'task_id': task.task_id});
+                            if (data.errId == 0) {
+                                layer.open({
+                                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                                    content: "<p style='text-align: center'>停止成功</p>",
+                                    offset: '100px',
+                                    btn: ['确定'],
+                                    btnAlign: 'c',
+                                    yes: function (index) {
+                                        layer.close(index);
+                                        var state1 = document.getElementById(task.task_id + '_1');
+                                        state1.innerText = '已中断';
+                                        state1.style.color = 'red';
+                                    }
+                                });
+                            } else {
+                                layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                            }
+                        }
+                    }, btn2: function (index) {
+                        layer.close(index)
+                    }
+                });
+            })
+        }
+
+        function start2(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var ele = document.getElementById(task.task_id + '_2');
+                var status1 = document.getElementById(task.task_id + '_1').innerText.replace(/\s+/g,"");
+                if (status1 == '未启动' || status1 == '运行中') {
+                    layer.msg("当前状态不可启动", {icon: 2, offset: '100px'});
+                } else {
+                    var status = ele.innerText;
+                    if (status == '运行中') {
+                        layer.msg("当前程序已在运行", {icon: 2, offset: '100px'});
+                    } else {
+                        var data = post("/spider/start_task2/", {
+                            'spider_id': task.spider_id,
+                            'task_id': task.task_id,
+                            'table_name': task.table_name
+                        });
+                        if (data.errId == 0) {
+                            layer.open({
+                                title: ['提示', 'padding-left:80px;text-align: center;'],
+                                content: "<p style='text-align: center'>启动成功</p>",
+                                offset: '100px',
+                                btn: ['确定'],
+                                btnAlign: 'c',
+                                yes: function (index) {
+                                    layer.close(index);
+                                    var state2 = document.getElementById(task.task_id + '_2');
+                                    state2.innerText = '运行中';
+                                    state2.style.color = 'black';
+                                }
+                            });
+                        } else {
+                            layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                        }
+                    }
+                }
+            })
+        }
+
+        function stop2(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                var ele = document.getElementById(task.task_id + '_2');
+                var status = ele.innerText.replace(/\s+/g,"");
+                if (status != '运行中') {
+                    layer.msg("当前状态停止无效", {icon: 2, offset: '100px'});
+                } else {
+                    var data = post("/spider/stop_task2/", {'task_id': task.task_id});
+                    if (data.errId == 0) {
+                        layer.open({
+                            title: ['提示', 'padding-left:80px;text-align: center;'],
+                            content: "<p style='text-align: center'>停止成功</p>",
+                            offset: '100px',
+                            btn: ['确定'],
+                            btnAlign: 'c',
+                            yes: function (index) {
+                                layer.close(index);
+                                var state2 = document.getElementById(task.task_id + '_2');
+                                state2.innerText = '已中断';
+                                state2.style.color = 'red';
+                            }
+                        });
+                    } else {
+                        layer.msg(data.errMsg, {icon: 2, offset: '100px'});
+                    }
+                }
+            })
+        }
+
+        function downfile(task) {
+            var ele = document.getElementById(task.task_id + '_2');
+            var status = ele.innerText.replace(/\s+/g,"");
+            var down_status = document.getElementById('download' + task.task_id);
+            if (status == "运行中" || status == "未启动") {
+                layer.msg("当前状态不可下载", {icon: 2, offset: '100px'});
+                return;
+            } else {
+                var task_id = task.task_id;
+                window.location = "/spider/down_file/?task_id=" + task_id;
+                down_status.innerText = '已下载'
+            }
+        }
+
+        function del_task(task) {
+            layui.use(['element', 'layer'], function () {
+                var element = layui.element, layer = layui.layer;
+                layer.open({
+                    title: ['提示', 'padding-left:80px;text-align: center;'],
+                    content: "<p style='text-align: center'>确定要删除吗</p>",
+                    offset: '100px',
+                    btn: ['确定', '取消'],
+                    btnAlign: 'c',
+                    yes: function (index) {
+                        layer.close(index);
+                        var ele = document.getElementById(task.task_id + '_1');
+                        var status = ele.innerText.replace(/\s+/g,"");
+                        if (status == "运行中" || status == "运行中") {
+                            layer.msg("运行中不可删除", {icon: 2, offset: "100px"});
+                        } else {
+                            var data = post("/spider/del_task/", params = {"task_id": task.task_id});
+                            if (data.errId == 0) {
+                                document.getElementById(task.task_id).style.display = "none";
+                                layer.msg("删除成功", {icon: 1, offset: "100px"});
+                            } else {
+                                layer.msg(data.errMsg, {icon: 2, offset: "100px"})
+                            }
+                        }
+                    }, btn2: function (index) {
+                        layer.close(index)
+                    }
+                })
+            });
+
+        }
+
+        function more(task) {
+            window.location = "/spider/operation/?task_id=" + task.task_id;
+        }
+
+        function page_up() {
+            var current_page = document.getElementById('current_page').innerText;
+            if (current_page == 1) {
+                return
+            } else {
+                var prev_page = parseInt(current_page) - 1;
+                var user = document.getElementById('user').value;
+                var create_time = document.getElementById('create_time').value;
+                load_html({'user': user, 'create_time': create_time, 'page': prev_page});
+            }
+        }
+
+        function page_down() {
+            var current_page = document.getElementById('current_page').innerText;
+            var totle_page = document.getElementById('totle_page').innerText;
+            if (current_page == totle_page) {
+                return
+            } else {
+                var next_page = parseInt(current_page) + 1;
+                var user = document.getElementById('user').value;
+                var create_time = document.getElementById('create_time').value;
+                load_html({'user': user, 'create_time': create_time, 'page': next_page});
+            }
+        }
+    </script>
+{% endblock bottomfiles %}

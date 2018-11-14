@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">早稻</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <form class="layui-form" action="">
+                <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                <div id="formm" class="layui-col-md8">
+                    <div class="layui-col-md8">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">参数字符串</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="data_str" autocomplete="off" class="layui-input" placeholder="获取方法看下方操作说明">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载文件名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">用户名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="username_zdao" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密码</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="password_zdao" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="btn1">开始爬虫</button>
+                    </div>
+                </div>
+            </form>
+            <br>
+            <h2 class="site-h1">参数字符串寻找方法</h2>
+            <ul class="layui-timeline">
+                <li>
+                    <div style="margin-left: 10px">
+                        <h5>登录早稻，跳转条件搜索页面，填写搜索条件，填写完毕，按F12或者右键点击检查，
+                            在Network中找到 searchPerson 开头的连接点击，然后在右侧 headers 最下方找到 view source 点击 然后复制内容。</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript" src="{% static 'js/salesmind/condition_zdao.js' %}"></script>
+    <script type="text/javascript">
+        layui.use(['element','form'], function() {
+            var element = layui.element,form=layui.form;
+            form.on('submit(btn1)', function(data){
+                var param = data.field;
+                var res = post('/spider/spider_zdao_person_search/',param);
+                if(res == "0"){
+                    layer.msg("开始爬虫",{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+
+    </script>
+{% endblock bottomfiles %}

@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+        .layui-form-radio {
+            line-height: 28px;
+            margin: 6px 0px 0 0;
+            padding-right: 10px;
+            cursor: pointer;
+            font-size: 0;
+        }
+    .layui-unselect{
+        display: none;
+    }
+    .check{
+        position: relative;
+        top:9px;
+    }
+    .add{
+        position: absolute;
+        top:10px;
+        right: 0px;
+    }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">公司筛选</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row" style="position: relative;">
+            <form class="layui-form" action="">
+                <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                <input type="hidden" name="spider_id" value="c5">
+                <div id="formm" class="layui-col-md8">
+                    <div id="company">
+                        <div class="layui-col-md6">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">关键词</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="keywords0" autocomplete="off" class="layui-input" placeholder="请输入简历关键词，多关键词可用空格分隔">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">筛选字段</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="col0" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+                            <div class="">
+                                <label class="layui-form-label">包含关键词</label>
+                                <div class="">
+                                    <input class="check" type="checkbox" name="contain_keyword0" style="display: block;width: 20px;height: 20px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md6">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载文件名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                    </div>
+                </div>
+            </form>
+            <div class="add" style="text-align: right">
+                <button class="layui-btn layui-btn-normal layui-btn-sm" lay-submit lay-filter="btnAdd">添加条件</button>
+            </div>
+            <h2 class="site-h1">操作说明</h2>
+            <ul class="layui-timeline">
+                <li>
+                    <div style="margin-left: 20px">
+                        <h5>1.输入文件名（不能为空）</h5>
+                    </div>
+                </li>
+                <li>
+                    <div style="margin-left: 20px">
+                        <h5>2.筛选字段：即表头，表头不可为数字</h5>
+                    </div>
+                </li>
+                <li>
+                    <div style="margin-left: 20px">
+                        <h5>3.生成任务</h5>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        var keywords = 0;
+        layui.use(['element','form'], function() {
+            var element = layui.element,form=layui.form;
+            form.on('submit(btn)', function(data){
+                var param=data.field;
+                param.number = keywords +1
+                var res = post('/spider/create_task/',param);
+                if(res.errId =="0"){
+                    layer.msg("创建成功",{icon: 1,offset: '100px'});
+                }else{
+                    layer.msg(res.errMsg,{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+            form.on('submit(btnAdd)',function(data){
+                keywords ++;
+                $("#company").append(`
+                        <div class="layui-col-md6">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">关键词</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="keywords${keywords}" autocomplete="off" class="layui-input" placeholder="请输入简历关键词，多关键词可用空格分隔">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">筛选字段</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="col${keywords}" autocomplete="off" class="layui-input">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+                            <div class="">
+                                <label class="layui-form-label">包含关键词</label>
+                                <div class="layui-input-block">
+                                    <input class="check" type="checkbox" name="contain_keyword${keywords}" style="display: block;width: 20px;height: 20px;">
+                                </div>
+                            </div>
+                        </div>
+                `);
+            });
+        });
+
+    </script>
+{% endblock bottomfiles %}

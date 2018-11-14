@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}上海门迪智能科技有限公司{% endblock title %}
+{% block stylecss %}
+    <style>
+        .site-h1 {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            color: #393D49;
+            border-bottom: 1px solid #eee;
+        }
+        .layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            width: 80px;
+            font-weight: 400;
+            text-align: center;
+        }
+    </style>
+{% endblock stylecss %}
+{% block body %}
+    <h1 class="site-h1">智联51百度版</h1>
+    <div style="margin: 20px 0px;">
+        <div class="layui-row">
+            <form class="layui-form" action="">
+                <input type="hidden" name="user_id" value="{{ request.session.userid }}">
+                <input type="hidden" name="spider_id" value="31">
+                <div id="formm" class="layui-col-md8">
+                    <div class="layui-col-md8">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">下载文件名</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="table_name" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item" pane="">
+                            <label class="layui-form-label">采集类型</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="type" lay-skin="primary" title="智联招聘" value="0" checked>
+                                <input type="radio" name="type" lay-skin="primary" title="前程无忧" value="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <button class="layui-btn" lay-submit lay-filter="btn">生成任务</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock body %}
+{% block bottomfiles %}
+    <script type="text/javascript">
+        layui.use(['element','form'], function() {
+            var form=layui.form;
+            form.on('submit(btn)', function(data){
+                var param=data.field;
+                if (param.table_name != ''){
+                    var res = post('/spider/create_task/',param);
+                    if(res.errId =="0"){
+                        layer.msg("创建成功",{icon: 1,offset: '100px'});
+                    }else{
+                        layer.msg(res.errMsg,{icon: 2,offset: '100px'});
+                    }
+                }else{
+                    layer.msg('下载文件名不可为空',{icon: 2,offset: '100px'});
+                }
+                return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+            });
+        });
+    </script>
+{% endblock bottomfiles %}

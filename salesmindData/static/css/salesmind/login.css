@@ -1,0 +1,12 @@
+body {
+    margin: 0 auto;
+    background-image: url(../../images/background.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+a:hover{
+    color:blue;
+}
+input:disabled{
+    background-color: #b2b2b2;
+}
